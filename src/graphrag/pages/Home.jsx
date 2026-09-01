@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Card, PageHead, Section } from '../components/Shell'
 import { CompareMatrix, Legend } from '../components/CompareMatrix'
 import { Pipeline } from '../components/Pipeline'
+import { Walkthrough } from '../components/Walkthrough'
 import { MODE_META, MODES, fmt } from '../api'
 import data from '../data/benchmark.json'
 
@@ -143,6 +144,13 @@ export default function Home() {
             </p>
           </Card>
         </div>
+      </Section>
+
+      <Section
+        label="Why Vector RAG fails, and how GraphRAG gets the answer"
+        note="one query, traced step by step against the live corpus"
+      >
+        <Walkthrough />
       </Section>
 
       <Section

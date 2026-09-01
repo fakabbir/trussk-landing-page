@@ -29,7 +29,9 @@ function Stage({ num, title, subtitle, children, defaultOpen = false }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-baseline gap-4 py-4 text-left transition-colors hover:bg-layer"
+        className={`flex w-full cursor-pointer items-baseline gap-4 px-5 py-4 text-left
+                    transition-colors hover:bg-interactive-light
+                    focus-visible:bg-interactive-light ${open ? 'bg-layer' : ''}`}
       >
         <span className="w-8 shrink-0 font-mono text-sm font-semibold tabular-nums text-interactive">
           {num}
@@ -38,9 +40,14 @@ function Stage({ num, title, subtitle, children, defaultOpen = false }) {
           <span className="block text-[15.5px] font-semibold text-text">{title}</span>
           <span className="mt-0.5 block text-[13px] text-secondary">{subtitle}</span>
         </span>
-        <span className="shrink-0 font-mono text-[11px] text-helper">{open ? '−' : '+'}</span>
+        <span
+          aria-hidden="true"
+          className="shrink-0 font-mono text-[13px] leading-none text-interactive"
+        >
+          {open ? '−' : '+'}
+        </span>
       </button>
-      {open && <div className="pb-7 pl-0 sm:pl-12">{children}</div>}
+      {open && <div className="px-5 pb-7 sm:pl-[4.25rem]">{children}</div>}
     </div>
   )
 }
@@ -114,7 +121,7 @@ const F345_SAMPLE = `ACCESSION_NUMBER     | RPTOWNERCIK | RPTOWNERNAME        | 
 # RPTOWNER_RELATIONSHIP is comma-joined and multi-valued:
 #   "Director,Officer"                 -> two edges
 #   "Director,Officer,TenPercentOwner" -> three edges
-# Names are SURNAME FIRST: 'POLK DENNIS', not 'Dennis Polk'.`
+# Names are SURNAME FIRST: 'LOZANO MONICA C', not 'Monica Lozano'.`
 
 const SECTION_ROW = `{
  "accession_number": "0001477932-25-007253",
@@ -164,8 +171,7 @@ const GRAPH = `(:Company   {cik, name, sic, sicDescription})
 (:Company)-[:AUDITED_BY  {filingId, fiscalYear}]->(:AuditFirm)
 (:Subsidiary)-[:RESOLVES_TO]->(:Company)`
 
-const CYPHER = `MATCH (p:Person)-[:OFFICER_OF|DIRECTOR_OF]->(c:Company)
-WHERE toLower(p.name) CONTAINS 'polk'
+const CYPHER = `MATCH (p:Person {cik: 1179864})-[:OFFICER_OF|DIRECTOR_OF]->(c:Company)
 WITH DISTINCT c
 MATCH (c)-[:FILED]->(f:Filing)
 WHERE f.formType = '10-K' AND f.hasRiskFactors = true
@@ -204,7 +210,7 @@ export function Pipeline() {
         </p>
       </div>
 
-      <div className="px-5">
+      <div>
         {/* ───────────────────────── 01 ───────────────────────── */}
         <Stage
           num="01"
@@ -326,10 +332,11 @@ export function Pipeline() {
           <Code label="raw TSV, plus the two conventions that matter">{F345_SAMPLE}</Code>
           <Fact>
             Names being surname-first is not trivia. A query written as{' '}
-            <code className="font-mono text-[12px]">ILIKE &apos;%Dennis Polk%&apos;</code> finds
-            nothing; <code className="font-mono text-[12px]">ILIKE &apos;%polk%&apos;</code> finds{' '}
-            <strong>four different people</strong>. That single fact is what separates the graph
-            from the SQL baseline on the hardest question.
+            <code className="font-mono text-[12px]">ILIKE &apos;%Monica Lozano%&apos;</code> finds
+            nothing; <code className="font-mono text-[12px]">ILIKE &apos;%lozano%&apos;</code> finds{' '}
+            <strong>three different people</strong> — Monica C (Apple, Bank of America, Target),
+            Mariano (Mondelez) and Santiago (Ternium). That single fact is what separates the
+            graph from the SQL baseline on the hardest question.
           </Fact>
         </Stage>
 
