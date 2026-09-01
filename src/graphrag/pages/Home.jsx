@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Card, PageHead, Section } from '../components/Shell'
 import { CompareMatrix, Legend } from '../components/CompareMatrix'
+import { Pipeline } from '../components/Pipeline'
 import { MODE_META, MODES, fmt } from '../api'
 import data from '../data/benchmark.json'
 
@@ -64,19 +65,19 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section label="Quick compare"note="one square per trial · rows are questions">
+      <Section label="Quick compare" note="one square per trial · rows are questions">
         <CompareMatrix />
         <Legend />
         <p className="mt-5 text-[13.5px] leading-relaxed text-secondary">
           Scoring is programmatic against hand-verified ground truth — required entities,
  forbidden entities, and citation precision/recall. No LLM judge.{' '}
-          <Link to="/graphrag/benchmarks"className="text-interactive hover:underline">
+          <Link to="/graphrag/benchmarks" className="text-interactive hover:underline">
             Full methodology →
           </Link>
         </p>
       </Section>
 
-      <Section label="Why similarity search cannot reach the answer"note="measured, not asserted">
+      <Section label="Why similarity search cannot reach the answer" note="measured, not asserted">
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <p className="font-serif text-3xl tabular-nums text-interactive">0</p>
@@ -144,7 +145,14 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section label="Architecture"note="two stores, one provenance key">
+      <Section
+        label="How it works, end to end"
+        note="raw filing → preprocessing → storage → query execution"
+      >
+        <Pipeline />
+      </Section>
+
+      <Section label="Architecture" note="two stores, one provenance key">
         <div className="grid gap-4 md:grid-cols-3">
           <ArchColumn
  title="text-to-SQL"

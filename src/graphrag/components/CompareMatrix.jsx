@@ -27,7 +27,7 @@ export function CompareMatrix({ compact = false }) {
         <tbody>
           {data.questions.map((q) => (
             <tr key={q.id} className="border-b border-border last:border-0">
-              <th scope="row"className="min-w-[230px] px-5 py-3.5 text-left align-top">
+              <th scope="row" className="min-w-[230px] px-5 py-3.5 text-left align-top">
                 <span className="font-mono text-[11px] font-semibold text-interactive">{q.id}</span>
                 <span className="mt-0.5 block text-[13.5px] font-medium text-text">
                   {cleanKind(q.kind)}
@@ -66,7 +66,7 @@ export function CompareMatrix({ compact = false }) {
             </tr>
           ))}
           <tr className="bg-layer">
-            <th scope="row"className="px-5 py-3 text-left font-mono text-[11px] uppercase tracking-wider text-secondary">
+            <th scope="row" className="px-5 py-3 text-left font-mono text-[11px] uppercase tracking-wider text-secondary">
  all 12 runs
             </th>
             {MODES.map((m) => {

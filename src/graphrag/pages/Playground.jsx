@@ -20,7 +20,7 @@ function Skeleton() {
  return (
     <div className="animate-pulse space-y-2">
       {['92%', '74%', '83%', '56%'].map((w) => (
-        <div key={w} className="h-2.5 bg-layer-alt"style={{ width: w }} />
+        <div key={w} className="h-2.5 bg-layer-alt" style={{ width: w }} />
       ))}
     </div>
   )
@@ -317,7 +317,7 @@ export default function Playground() {
 
  return (
     <>
-      <PageHead eyebrow="Live · three architectures · one question"title="Playground">
+      <PageHead eyebrow="Live · three architectures · one question" title="Playground">
         <p>
           Ask anything of the loaded SEC filings. text-to-SQL, Vector RAG and GraphRAG run in
  parallel, each showing the query it wrote and the evidence it found. The four preset
@@ -332,7 +332,7 @@ export default function Playground() {
             <b>Live queries are not configured for this deployment.</b> Set{' '}
             <code className="font-mono text-[12px]">VITE_API_BASE</code> in the Vercel project
  environment to the API URL and redeploy. Until then, the fixed case studies on{' '}
-            <a href="/graphrag/benchmarks"className="underline">
+            <a href="/graphrag/benchmarks" className="underline">
               Benchmarks
             </a>{' '}
  show the same panes with recorded results.

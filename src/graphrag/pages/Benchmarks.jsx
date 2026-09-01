@@ -180,7 +180,7 @@ export default function Benchmarks() {
         </p>
       </PageHead>
 
-      <Section label="Results"note="3 trials per question/mode">
+      <Section label="Results" note="3 trials per question/mode">
         <CompareMatrix />
         <Legend />
 
@@ -207,7 +207,7 @@ export default function Benchmarks() {
  ['tokens, 12 runs', (t) => fmt(t.tokens), null],
               ].map(([label, get, cls]) => (
                 <tr key={label} className="border-b border-border last:border-0">
-                  <th scope="row"className="px-5 py-2.5 text-left font-normal text-secondary">
+                  <th scope="row" className="px-5 py-2.5 text-left font-normal text-secondary">
                     {label}
                   </th>
                   {MODES.map((m) => (
@@ -222,7 +222,7 @@ export default function Benchmarks() {
         </div>
       </Section>
 
-      <Section label="Keeping it fair"note="a rigged baseline proves nothing">
+      <Section label="Keeping it fair" note="a rigged baseline proves nothing">
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <h3 className="font-serif text-lg">What both baselines get</h3>
@@ -264,7 +264,7 @@ export default function Benchmarks() {
         </div>
       </Section>
 
-      <Section label="Dataset"note={`${fmt(totalChars)} characters of narrative text extracted`}>
+      <Section label="Dataset" note={`${fmt(totalChars)} characters of narrative text extracted`}>
         <div className="grid gap-4 lg:grid-cols-2">
           <Card>
             <h3 className="font-mono text-[11px] uppercase tracking-wider text-secondary">
@@ -330,7 +330,7 @@ export default function Benchmarks() {
         </div>
       </Section>
 
-      <Section label="Case studies"note="the actual query, answer and score for each question">
+      <Section label="Case studies" note="the actual query, answer and score for each question">
         <div className="mb-5 flex flex-wrap gap-2">
           {data.questions.map((q) => (
             <button
@@ -355,7 +355,7 @@ export default function Benchmarks() {
           ))}
       </Section>
 
-      <Section label="Where this does not support the thesis"note="reported because it matters more than the wins">
+      <Section label="Where this does not support the thesis" note="reported because it matters more than the wins">
         <div className="grid gap-4 md:grid-cols-2">
           {[
  [

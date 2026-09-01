@@ -15,10 +15,10 @@ export function Shell({ children }) {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex items-center justify-between py-3.5">
             <div className="flex items-center gap-3">
-              <Link to="/"className="flex items-center gap-2.5 shrink-0">
+              <Link to="/" className="flex items-center gap-2.5 shrink-0">
                 <div className="flex h-8 w-8 items-center justify-center bg-interactive-light">
-                  <svg className="h-4 w-4 text-interactive"viewBox="0 0 24 24"fill="none"stroke="currentColor"strokeWidth={2.5}>
-                    <path strokeLinecap="round"strokeLinejoin="round"d="M6 18V6l6 4.5L18 6v12"/>
+                  <svg className="h-4 w-4 text-interactive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18V6l6 4.5L18 6v12"/>
                   </svg>
                 </div>
                 <span className="font-serif text-lg tracking-tight">Trussk</span>
@@ -63,7 +63,7 @@ export function Shell({ children }) {
             A Trussk research subproject. Data: SEC EDGAR, public domain.
             Not investment advice.
           </p>
-          <Link to="/"className="transition-colors hover:text-interactive">
+          <Link to="/" className="transition-colors hover:text-interactive">
             ← Back to trussk.com
           </Link>
         </div>
