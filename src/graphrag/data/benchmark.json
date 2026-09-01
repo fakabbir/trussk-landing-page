@@ -1,0 +1,1013 @@
+{
+ "modes": [
+  "text_to_sql",
+  "vector_rag",
+  "graphrag"
+ ],
+ "totals": {
+  "text_to_sql": {
+   "passes": 3,
+   "runs": 12,
+   "halluc": 2,
+   "refused": 2,
+   "uncited": 3,
+   "tokens": 27810,
+   "latency": 5.7,
+   "evidence": 617
+  },
+  "vector_rag": {
+   "passes": 3,
+   "runs": 12,
+   "halluc": 0,
+   "refused": 8,
+   "uncited": 0,
+   "tokens": 25240,
+   "latency": 2.2,
+   "evidence": 8770
+  },
+  "graphrag": {
+   "passes": 9,
+   "runs": 12,
+   "halluc": 0,
+   "refused": 0,
+   "uncited": 0,
+   "tokens": 51558,
+   "latency": 6.4,
+   "evidence": 4415
+  }
+ },
+ "usage": {
+  "calls": 74,
+  "prompt_tokens": 91856,
+  "completion_tokens": 12752,
+  "reasoning_tokens": 0,
+  "total_tokens": 104608
+ },
+ "questions": [
+  {
+   "id": "Q1",
+   "kind": "single-document semantic",
+   "question": "What supply chain and component shortage risks did TD SYNNEX disclose in the risk factors of its 10-K?",
+   "expect": "vector RAG or GraphRAG",
+   "validAccessions": [
+    "0001564590-22-003003"
+   ],
+   "required": [
+    "TD SYNNEX"
+   ],
+   "runs": {
+    "text_to_sql": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 3,
+     "trialStatuses": [
+      "uncited",
+      "uncited",
+      "uncited"
+     ],
+     "sample": {
+      "status": "uncited",
+      "answer": "TD SYNNEX\u2019s 10-K risk factors disclose that OEM suppliers experienced problems during fiscal years 2020 and 2021 due to global supply chain constraints from the COVID-19 pandemic. If shortages or delays persist, product prices may increase or products may become unavailable. (Accession number not provided in the result row; the passage is from the most recent 10-K filing.)",
+      "query": "WITH risk AS (\n  SELECT fs.accession_number, fs.company_cik, fs.section_text\n  FROM filing_section fs\n  JOIN company c ON c.cik = fs.company_cik\n  WHERE fs.item_code = '1A'\n    AND c.name ILIKE '%TD SYNNEX%'\n  ORDER BY fs.filing_date DESC\n  LIMIT 1\n)\nSELECT\n  ts_headline('english', section_text,\n              plainto_tsquery('english', 'supply chain | component shortage | shortage'),\n              'MaxFragments=5, MaxWords=80, MinWords=30') AS relevant_passages\nFROM risk",
+      "queryLang": "sql",
+      "rows": 1,
+      "retrieved": [],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2749,
+      "latency": 5.4,
+      "calls": 3,
+      "evidence": 319,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "TD SYNNEX"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": 0.0
+     }
+    },
+    "vector_rag": {
+     "passes": 3,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "pass",
+      "pass",
+      "pass"
+     ],
+     "sample": {
+      "status": "pass",
+      "answer": "The provided excerpts do not contain TD SYNNEX's 10-K risk factor disclosures on supply chain and component shortage risks. The only TD SYNNEX 10-K excerpt (accession [0001564590-22-003003]) mentions global supply chain disruption only in the context of a public health crisis (COVID-19), not specific component shortages. The other excerpts are from Concentrix Corp's 10-K (accession [0001803599-22-000025]) and discuss the spin-off from TD SYNNEX, not TD SYNNEX's own risk factors.",
+      "query": null,
+      "queryLang": null,
+      "rows": null,
+      "retrieved": [
+       {
+        "accession": "0001803599-22-000025",
+        "item": "1A",
+        "company": "Concentrix Corp",
+        "sim": 0.6076
+       },
+       {
+        "accession": "0001803599-22-000025",
+        "item": "1",
+        "company": "Concentrix Corp",
+        "sim": 0.5543
+       },
+       {
+        "accession": "0001803599-22-000025",
+        "item": "1",
+        "company": "Concentrix Corp",
+        "sim": 0.5535
+       },
+       {
+        "accession": "0001564590-22-003003",
+        "item": "1A",
+        "company": "TD SYNNEX CORP",
+        "sim": 0.5416
+       },
+       {
+        "accession": "0001564590-22-003003",
+        "item": "7",
+        "company": "TD SYNNEX CORP",
+        "sim": 0.5381
+       },
+       {
+        "accession": "0001803599-22-000025",
+        "item": "7",
+        "company": "Concentrix Corp",
+        "sim": 0.5266
+       },
+       {
+        "accession": "0001067701-22-000008",
+        "item": "1",
+        "company": "UNITED RENTALS, INC.",
+        "sim": 0.5215
+       },
+       {
+        "accession": "0000815097-22-000009",
+        "item": "1A",
+        "company": "CARNIVAL CORP",
+        "sim": 0.5135
+       }
+      ],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2135,
+      "latency": 5.14,
+      "calls": 1,
+      "evidence": 8924,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "TD SYNNEX"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [
+       "0001564590-22-003003",
+       "0001803599-22-000025"
+      ],
+      "correctCites": [
+       "0001564590-22-003003"
+      ],
+      "citePrecision": 0.5,
+      "citeRecall": 1.0
+     }
+    },
+    "graphrag": {
+     "passes": 3,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "pass",
+      "pass",
+      "pass"
+     ],
+     "sample": {
+      "status": "pass",
+      "answer": "**Traversal path:** Company -> Filing (10-K) -> Risk Factors (Item 1A)\n\n**Company identified:** TD SYNNEX CORP (CIK 1177394)\n\n**Disclosed supply chain and component shortage risks (Accession 0001564590-22-003003):**\n- **OEM supplier dependence:** Loss/deterioration of relationships with major OEMs (e.g., HP Inc.), OEMs authorizing additional distributors, selling directly to customers, or failing to establish new OEM relationships could hurt business. OEM liquidity/solvency issues could also negatively affect results.\n- **No guaranteed supply terms:** TD SYNNEX generally has no guaranteed price or delivery agreements with OEM suppliers.\n- **Product shortages:** Experienced supply shortages of certain products during fiscal 2020 and 2021 due to global supply chain constraints from the COVID-19 pandemic. Shortages/delays may increase prices or make products unavailable, and could impact the ability to procure critical components for customer orders.\n- **OEM distribution shifts:** OEMs may distribute through other distributors or increase existing distribution business elsewhere.\n- **Facility/supply chain disruptions:** Prolonged facility disruptions (natural disasters, fires, pandemics, technical failures) could cause supply shortages or delays in receiving products from OEMs or shipping to customers, harming operating results.\n\n**Subsidiaries:** 220 total (sample: Tech Data Education, Inc; DLT Solutions, LLC; License Online, Inc; Tec D Distribution (Malaysia) Sdn. Bhd; SYNNEX Information Technologies (Guizhou) Ltd). No additional hops produced results.",
+      "query": "MATCH (c:Company)-[:FILED]->(f:Filing) WHERE toLower(c.name) CONTAINS 'td synnex' AND f.formType = '10-K' AND f.hasRiskFactors = true RETURN c.cik AS companyCik, c.name AS companyName, f.accessionNumber AS accessionNumber",
+      "queryLang": "cypher",
+      "rows": 1,
+      "retrieved": [],
+      "expanded": [
+       {
+        "cik": 1177394,
+        "name": "TD SYNNEX CORP",
+        "subsidiaryCount": 220,
+        "riskFilings": [
+         "0001564590-22-003003"
+        ]
+       }
+      ],
+      "snippets": 3,
+      "textTerms": [
+       "supply chain",
+       "component shortage",
+       "shortage",
+       "supply"
+      ],
+      "tokens": 2464,
+      "latency": 5.23,
+      "calls": 2,
+      "evidence": 3003,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "TD SYNNEX"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [
+       "0001564590-22-003003"
+      ],
+      "correctCites": [
+       "0001564590-22-003003"
+      ],
+      "citePrecision": 1.0,
+      "citeRecall": 1.0
+     }
+    }
+   }
+  },
+  {
+   "id": "Q2",
+   "kind": "structured aggregation",
+   "question": "Which audit firm appears as the auditor for the most companies in this dataset, and how many companies does it audit?",
+   "expect": "text-to-SQL",
+   "validAccessions": [],
+   "required": [
+    "Ernst & Young"
+   ],
+   "runs": {
+    "text_to_sql": {
+     "passes": 3,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "pass",
+      "pass",
+      "pass"
+     ],
+     "sample": {
+      "status": "pass",
+      "answer": "Ernst & Young LLP appears as the auditor for the most companies, auditing 5 companies.  \n(Source: query result rows; accession numbers are not provided in the result.)",
+      "query": "SELECT a.auditor_name, COUNT(DISTINCT a.company_cik) AS company_count\nFROM filing_auditor a\nGROUP BY a.auditor_name\nORDER BY company_count DESC\nLIMIT 1",
+      "queryLang": "sql",
+      "rows": 13,
+      "retrieved": [],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 1292,
+      "latency": 2.07,
+      "calls": 2,
+      "evidence": 335,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "Ernst & Young"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": null
+     }
+    },
+    "vector_rag": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "refused",
+      "fail",
+      "refused"
+     ],
+     "sample": {
+      "status": "refused",
+      "answer": "Based on the provided excerpts, BF Borgers CPA PC appears as the auditor for two companies: Zenosense, Inc. [0001829126-22-001655] and Balincan International Inc. [0001829126-22-001067]. The dataset does not contain enough information to determine the total number of companies audited by this firm or to compare with other audit firms.",
+      "query": null,
+      "queryLang": null,
+      "rows": null,
+      "retrieved": [
+       {
+        "accession": "0001410578-22-000022",
+        "item": "1A",
+        "company": "CHINA HGS REAL ESTATE INC.",
+        "sim": 0.4767
+       },
+       {
+        "accession": "0001829126-22-001655",
+        "item": "7A",
+        "company": "ZENOSENSE, INC.",
+        "sim": 0.4703
+       },
+       {
+        "accession": "0001084580-22-000006",
+        "item": "7",
+        "company": "Jefferies Group LLC",
+        "sim": 0.4656
+       },
+       {
+        "accession": "0001829126-22-001655",
+        "item": "7A",
+        "company": "ZENOSENSE, INC.",
+        "sim": 0.4499
+       },
+       {
+        "accession": "0001829126-22-001067",
+        "item": "7A",
+        "company": "Balincan International Inc.",
+        "sim": 0.4485
+       },
+       {
+        "accession": "0001640334-22-000145",
+        "item": "1",
+        "company": "Mirage Energy Corp",
+        "sim": 0.4452
+       },
+       {
+        "accession": "0001554795-22-000016",
+        "item": "1",
+        "company": "Item 9 Labs Corp.",
+        "sim": 0.4452
+       },
+       {
+        "accession": "0001084580-22-000006",
+        "item": "7",
+        "company": "Jefferies Group LLC",
+        "sim": 0.4443
+       }
+      ],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2221,
+      "latency": 1.9,
+      "calls": 1,
+      "evidence": 8953,
+      "entityRecall": 0.0,
+      "entitiesFound": [],
+      "entitiesMissing": [
+       "Ernst & Young"
+      ],
+      "forbidden": [],
+      "cited": [
+       "0001829126-22-001067",
+       "0001829126-22-001655"
+      ],
+      "correctCites": [],
+      "citePrecision": 0.0,
+      "citeRecall": null
+     }
+    },
+    "graphrag": {
+     "passes": 3,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "pass",
+      "pass",
+      "pass"
+     ],
+     "sample": {
+      "status": "pass",
+      "answer": "**Answer:** Ernst & Young LLP is the auditor for the most companies in this dataset, auditing **5 companies**.\n\n**Companies audited by Ernst & Young LLP:**\n1. Intel Corp (CIK 50863)\n2. Lockheed Martin Corp (CIK 936468)\n3. Alexandria Real Estate Equities, Inc. (CIK 1035443)\n4. Netflix Inc (CIK 1065280)\n5. United Rentals, Inc. (CIK 1067701)\n\n**Traversal path:** Company -> AuditFirm (via AUDITED_BY relationship)\n\n**Note:** The traversal returned only 5 rows (all Ernst & Young), and the complete per-company expansion confirms these 5 companies. No other audit firms appear in the data provided. The count of 5 is derived from the `companyCount` field in the traversal results.\n\n**Citations:** Accession numbers for the filings: 0000050863-22-000007 (Intel), 0000936468-22-000008 (Lockheed Martin), 0001035443-22-000040 (Alexandria), 0001065280-22-000036 (Netflix), and the United Rentals filing (accession not fully shown but referenced in the expansion).",
+      "query": "MATCH (c:Company)-[:AUDITED_BY]->(a:AuditFirm) WITH a, COUNT(DISTINCT c) AS companyCount ORDER BY companyCount DESC LIMIT 1 MATCH (c:Company)-[:AUDITED_BY]->(a) RETURN c.cik AS companyCik, a.name AS auditFirm, companyCount",
+      "queryLang": "cypher",
+      "rows": 5,
+      "retrieved": [],
+      "expanded": [
+       {
+        "cik": 50863,
+        "name": "INTEL CORP",
+        "subsidiaryCount": 20,
+        "riskFilings": []
+       },
+       {
+        "cik": 936468,
+        "name": "LOCKHEED MARTIN CORP",
+        "subsidiaryCount": 13,
+        "riskFilings": [
+         "0000936468-22-000008"
+        ]
+       },
+       {
+        "cik": 1035443,
+        "name": "ALEXANDRIA REAL ESTATE EQUITIES, INC.",
+        "subsidiaryCount": 3,
+        "riskFilings": [
+         "0001035443-22-000040"
+        ]
+       },
+       {
+        "cik": 1065280,
+        "name": "NETFLIX INC",
+        "subsidiaryCount": 11,
+        "riskFilings": [
+         "0001065280-22-000036"
+        ]
+       },
+       {
+        "cik": 1067701,
+        "name": "UNITED RENTALS, INC.",
+        "subsidiaryCount": 12,
+        "riskFilings": [
+         "0001067701-22-000008"
+        ]
+       }
+      ],
+      "snippets": 1,
+      "textTerms": [
+       "audit firm",
+       "auditor",
+       "independent registered public accounting firm"
+      ],
+      "tokens": 4258,
+      "latency": 5.92,
+      "calls": 3,
+      "evidence": 1370,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "Ernst & Young"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [
+       "0000050863-22-000007",
+       "0000936468-22-000008",
+       "0001035443-22-000040",
+       "0001065280-22-000036"
+      ],
+      "correctCites": [],
+      "citePrecision": 0.0,
+      "citeRecall": null
+     }
+    }
+   }
+  },
+  {
+   "id": "Q3",
+   "kind": "multi-hop relational + text  (THE KILLER QUERY)",
+   "question": "Dennis Polk holds an insider role at more than one company in this dataset. For every company where he is an officer or director, list that company's disclosed subsidiaries and summarise the supply chain risks that company reported in its 10-K risk factors.",
+   "expect": "GraphRAG",
+   "validAccessions": [
+    "0001564590-22-003003",
+    "0001803599-22-000025"
+   ],
+   "required": [
+    "TD SYNNEX",
+    "Concentrix"
+   ],
+   "runs": {
+    "text_to_sql": {
+     "passes": 0,
+     "halluc": 2,
+     "uncited": 0,
+     "trialStatuses": [
+      "halluc",
+      "halluc",
+      "refused"
+     ],
+     "sample": {
+      "status": "halluc",
+      "answer": "Dennis Polk holds insider roles at 5 companies. Subsidiaries and supply chain risks:\n\n- **Bank of Hawaii Corp** (CIK 46195): No subsidiaries disclosed; no supply chain risk discussion found.\n- **Colgate-Palmolive Co** (CIK 21665): No subsidiaries disclosed; no supply chain risk discussion found.\n- **Concentrix Corp** (CIK 1803599): Subsidiaries include Beijing Jumeng Technology Development Ltd (China), BPO Holdco Co\u00f6peratief U.A (Netherlands), Chongqing Jumeng Technologies Development Ltd (China), CNX Services Jamaica Limited (Jamaica), Concentrix Beteiligungen GmbH (Germany), Concentrix Brazil Outsourcing of Processes, Administrative Services and\u2026 (truncated). Supply chain risk: uncertainty from COVID-19 impacting global economy, supply chains, and inflation.\n- **Monster Beverage Corp** (CIK 865752): No subsidiaries disclosed; no supply chain risk discussion found.\n- **TD SYNNEX Corp** (CIK 1177394): Subsidiaries include 2117974 Ontario Inc (Canada), Advanced Technology Trading Company Ltd (United Kingdom), Afina Peru, S.A.C (Peru), Afinasis, S.A. de C.V (Mexico), Afina Sistemas Informaticos Limitada (Chile), Afina Sistemas Informaticos, S.L (Spain), Afina Sistemas, Sociedade Ltda (Brazil), Afina, S.R.L (Argentina), and more (truncated). Supply chain risk: failure to establish relationships with new OEM suppliers or expand distribution/supply chain services could adversely affect business.\n\nNote: Subsidiary lists for Concentrix and TD SYNNEX are truncated in the result; full lists may be longer.",
+      "query": "WITH polk_roles AS (\n    SELECT DISTINCT issuer_cik, issuer_name\n    FROM reporting_owner\n    WHERE owner_name ILIKE '%polk%'\n      AND (is_officer OR is_director)\n),\npolk_subs AS (\n    SELECT s.parent_cik, s.subsidiary_name, s.jurisdiction\n    FROM subsidiary s\n    JOIN polk_roles pr ON s.parent_cik = pr.issuer_cik\n),\npolk_risks AS (\n    SELECT v.company_cik, v.accession_number,\n           ts_headline('english', v.section_text,\n                       plainto_tsquery('english', 'supply chain'),\n                       'MaxFragments=3, MaxWords=60, MinWords=25') AS risk_excerpt\n    FROM v_risk_factors v\n    JOIN polk_roles pr ON v.company_cik = pr.issuer_cik\n    WHERE v.section_text ILIKE '%supply chain%'\n)\nSELECT pr.issuer_cik,\n       pr.issuer_name,\n       COALESCE(string_agg(DISTINCT ps.subsidiary_name || \n                           CASE WHEN ps.jurisdiction IS NOT NULL \n                                THEN ' (' || ps.jurisdiction || ')' \n                                ELSE '' END, '; '), 'No subsidiaries disclosed') AS subsidiaries,\n       COALESCE(string_agg(DISTINCT prk.risk_excerpt, ' | '), 'No supply chain risk discussion found') AS supply_chain_risks\nFROM polk_roles pr\nLEFT JOIN polk_subs ps ON pr.issuer_cik = ps.parent_cik\nLEFT JOIN polk_risks prk ON pr.issuer_cik = prk.company_cik\nGROUP BY pr.issuer_cik, pr.issuer_name\nORDER BY pr.issuer_name\nLIMIT 50",
+      "queryLang": "sql",
+      "rows": 5,
+      "retrieved": [],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2649,
+      "latency": 7.8,
+      "calls": 2,
+      "evidence": 1619,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "TD SYNNEX",
+       "Concentrix"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [
+       "Monster Beverage",
+       "Bank of Hawaii",
+       "Colgate"
+      ],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": 0.0
+     }
+    },
+    "vector_rag": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "refused",
+      "refused",
+      "refused"
+     ],
+     "sample": {
+      "status": "refused",
+      "answer": "Based on the provided excerpts, I cannot confirm that Dennis Polk holds an insider role at any company in this dataset. The excerpts do not mention Dennis Polk at all.\n\nTherefore, I cannot list any companies where he is an officer or director, nor can I summarize any disclosed subsidiaries or supply chain risks for such companies.\n\nThe excerpts mention various companies (Executive Network Partnering Corp, Virtual Interactive Technologies Corp, TD SYNNEX Corp, Zenosense Inc., Bantec Inc.), but none of them are linked to Dennis Polk in the provided text.",
+      "query": null,
+      "queryLang": null,
+      "rows": null,
+      "retrieved": [
+       {
+        "accession": "0001193125-22-023409",
+        "item": "1",
+        "company": "Executive Network Partnering Corp",
+        "sim": 0.4929
+       },
+       {
+        "accession": "0001193125-22-023409",
+        "item": "1A",
+        "company": "Executive Network Partnering Corp",
+        "sim": 0.4824
+       },
+       {
+        "accession": "0001493152-22-001050",
+        "item": "1",
+        "company": "VIRTUAL INTERACTIVE TECHNOLOGIES CORP.",
+        "sim": 0.4791
+       },
+       {
+        "accession": "0001564590-22-003003",
+        "item": "1A",
+        "company": "TD SYNNEX CORP",
+        "sim": 0.4785
+       },
+       {
+        "accession": "0001829126-22-001655",
+        "item": "1A",
+        "company": "ZENOSENSE, INC.",
+        "sim": 0.4743
+       },
+       {
+        "accession": "0001213900-22-001080",
+        "item": "1A",
+        "company": "Bantec, Inc.",
+        "sim": 0.474
+       },
+       {
+        "accession": "0001193125-22-019927",
+        "item": "1A",
+        "company": "Trepont Acquisition Corp I",
+        "sim": 0.4731
+       },
+       {
+        "accession": "0001564590-22-001347",
+        "item": "1",
+        "company": "Lux Health Tech Acquisition Corp.",
+        "sim": 0.4718
+       }
+      ],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 1911,
+      "latency": 2.15,
+      "calls": 1,
+      "evidence": 8298,
+      "entityRecall": 0.5,
+      "entitiesFound": [
+       "TD SYNNEX"
+      ],
+      "entitiesMissing": [
+       "Concentrix"
+      ],
+      "forbidden": [
+       "Executive Network Partnering"
+      ],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": 0.0
+     }
+    },
+    "graphrag": {
+     "passes": 3,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "pass",
+      "pass",
+      "pass"
+     ],
+     "sample": {
+      "status": "pass",
+      "answer": "**Traversal path:** Person \u2192 Company \u2192 Subsidiary (via OFFICER_OF/DIRECTOR_OF and SUBSIDIARY_OF edges).\n\n**Companies where Dennis Polk is an officer/director:** Concentrix Corp (CIK 1803599) and TD SYNNEX Corp (CIK 1177394).\n\n**Subsidiaries disclosed:**\n- **Concentrix Corp** (accession 0001803599-22-000025): 163 subsidiaries. Examples: Concentrix CRM Services Germany GmbH, Concentrix Services India Private Limited, Concentrix Services Holdco (Netherlands) B.V, Stream Florida Inc, Chongqing Jumeng Technologies Development Ltd.\n- **TD SYNNEX Corp** (accession 0001564590-22-003003): 220 subsidiaries. Examples: Tech Data Education, Inc, DLT Solutions, LLC, License Online, Inc, Tec D Distribution (Malaysia) Sdn. Bhd, SYNNEX Information Technologies (Guizhou) Ltd.\n\n**Supply chain risks in 10-K risk factors:**\n- **Concentrix** (0001803599-22-000025): COVID-19 pandemic disrupted global supply chains and labor force participation; general economic conditions, including supply chain inflation and international trade tensions (US-China, China-India), could adversely affect results.\n- **TD SYNNEX** (0001564590-22-003003): Dependence on OEM suppliers (e.g., HP Inc.); no guaranteed price/delivery agreements; supply shortages from COVID-19 constraints; OEM supplier liquidity issues; disruptions from natural disasters or pandemics could cause supply shortages or shipping delays.\n\nNo hops produced empty results.",
+      "query": "MATCH (p:Person)-[r:OFFICER_OF|DIRECTOR_OF]->(c:Company) WHERE toLower(p.name) CONTAINS 'polk' AND toLower(p.name) CONTAINS 'dennis' WITH DISTINCT c, r MATCH (c)-[:FILED]->(f:Filing) WHERE f.formType = '10-K' AND f.hasRiskFactors = true WITH c, f, r OPTIONAL MATCH (s:Subsidiary)-[:SUBSIDIARY_OF {filingId: f.accessionNumber}]->(c) RETURN c.cik AS companyCik, c.name AS companyName, s.nameNormalized AS subsidiaryName, f.accessionNumber AS accessionNumber, r.filingId AS filingId",
+      "queryLang": "cypher",
+      "rows": 2000,
+      "retrieved": [],
+      "expanded": [
+       {
+        "cik": 1177394,
+        "name": "TD SYNNEX CORP",
+        "subsidiaryCount": 220,
+        "riskFilings": [
+         "0001564590-22-003003"
+        ]
+       },
+       {
+        "cik": 1803599,
+        "name": "Concentrix Corp",
+        "subsidiaryCount": 163,
+        "riskFilings": [
+         "0001803599-22-000025"
+        ]
+       }
+      ],
+      "snippets": 5,
+      "textTerms": [
+       "supply chain",
+       "supplier",
+       "component shortage",
+       "logistics"
+      ],
+      "tokens": 5541,
+      "latency": 7.48,
+      "calls": 3,
+      "evidence": 7198,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "TD SYNNEX",
+       "Concentrix"
+      ],
+      "entitiesMissing": [],
+      "forbidden": [],
+      "cited": [
+       "0001564590-22-003003",
+       "0001803599-22-000025"
+      ],
+      "correctCites": [
+       "0001564590-22-003003",
+       "0001803599-22-000025"
+      ],
+      "citePrecision": 1.0,
+      "citeRecall": 1.0
+     }
+    }
+   }
+  },
+  {
+   "id": "Q4",
+   "kind": "cross-document entity resolution",
+   "question": "Are any companies listed as subsidiaries in an EX-21 exhibit also SEC filers in their own right in this dataset? Name them and their parent.",
+   "expect": "GraphRAG",
+   "validAccessions": [],
+   "required": [
+    "CCO Holdings"
+   ],
+   "runs": {
+    "text_to_sql": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "fail",
+      "refused",
+      "fail"
+     ],
+     "sample": {
+      "status": "fail",
+      "answer": "Yes. Two companies listed as subsidiaries in EX-21 exhibits are also SEC filers in this dataset:\n\n1. **Jefferies Group LLC** \u2013 subsidiary of **Jefferies Financial Group Inc.** (Accession: 1084580)\n2. **Volt Information Sciences, Inc.** \u2013 subsidiary of **Volt Information Sciences, Inc.** (Accession: 103872) \u2014 note this appears to be a self-listing (parent and subsidiary share the same name).",
+      "query": "WITH sub_filers AS (\n    SELECT DISTINCT\n        s.parent_cik,\n        s.subsidiary_name,\n        c.cik AS subsidiary_cik,\n        c.name AS subsidiary_filer_name\n    FROM subsidiary s\n    JOIN company c\n        ON lower(s.name_normalized) = lower(c.name)\n        OR lower(s.subsidiary_name) = lower(c.name)\n    WHERE c.source = 'rss'\n)\nSELECT\n    p.name AS parent_company_name,\n    sf.subsidiary_name AS subsidiary_as_filed,\n    sf.subsidiary_filer_name AS subsidiary_filer_name,\n    sf.subsidiary_cik\nFROM sub_filers sf\nJOIN company p ON p.cik = sf.parent_cik\nORDER BY p.name, sf.subsidiary_filer_name\nLIMIT 50",
+      "queryLang": "sql",
+      "rows": 2,
+      "retrieved": [],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2889,
+      "latency": 14.67,
+      "calls": 3,
+      "evidence": 276,
+      "entityRecall": 0.0,
+      "entitiesFound": [],
+      "entitiesMissing": [
+       "CCO Holdings"
+      ],
+      "forbidden": [],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": null
+     }
+    },
+    "vector_rag": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "refused",
+      "refused",
+      "refused"
+     ],
+     "sample": {
+      "status": "refused",
+      "answer": "The provided excerpts do not contain any EX-21 exhibit (list of subsidiaries) or any information identifying companies as SEC filers in their own right within a subsidiary list. The excerpts are from 10-K Item 1 or Item 1A sections and discuss general corporate structure, business operations, or SEC filing requirements, but none include an EX-21 exhibit or a subsidiary list naming companies that are also SEC filers.\n\nMissing: Any EX-21 exhibit content or subsidiary lists that would allow identification of subsidiary companies that are also SEC filers and their parent companies.",
+      "query": null,
+      "queryLang": null,
+      "rows": null,
+      "retrieved": [
+       {
+        "accession": "0001493152-22-002513",
+        "item": "1",
+        "company": "Exsular Financial Group Inc.",
+        "sim": 0.5149
+       },
+       {
+        "accession": "0001213900-22-001426",
+        "item": "1",
+        "company": "ScION Tech Growth I",
+        "sim": 0.5148
+       },
+       {
+        "accession": "0001213900-22-004241",
+        "item": "1",
+        "company": "DONGFANG CITY HOLDING GROUP Co Ltd",
+        "sim": 0.5108
+       },
+       {
+        "accession": "0001171843-22-000514",
+        "item": "1",
+        "company": "NOVAGOLD RESOURCES INC",
+        "sim": 0.509
+       },
+       {
+        "accession": "0001493152-22-000377",
+        "item": "1",
+        "company": "VISIBER57 CORP.",
+        "sim": 0.5077
+       },
+       {
+        "accession": "0001558370-22-000137",
+        "item": "1",
+        "company": "HURCO COMPANIES INC",
+        "sim": 0.5063
+       },
+       {
+        "accession": "0001140361-22-002186",
+        "item": "1A",
+        "company": "Lefteris Acquisition Corp.",
+        "sim": 0.5038
+       },
+       {
+        "accession": "0001477932-22-000506",
+        "item": "1",
+        "company": "Guskin Gold Corp.",
+        "sim": 0.5032
+       }
+      ],
+      "expanded": [],
+      "snippets": null,
+      "textTerms": [],
+      "tokens": 2177,
+      "latency": 2.58,
+      "calls": 1,
+      "evidence": 8908,
+      "entityRecall": 0.0,
+      "entitiesFound": [],
+      "entitiesMissing": [
+       "CCO Holdings"
+      ],
+      "forbidden": [],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": null
+     }
+    },
+    "graphrag": {
+     "passes": 0,
+     "halluc": 0,
+     "uncited": 0,
+     "trialStatuses": [
+      "fail",
+      "fail",
+      "fail"
+     ],
+     "sample": {
+      "status": "fail",
+      "answer": "**Answer:** No. The traversal `Subsidiary -> RESOLVES_TO -> Company` returned **zero** matches where a subsidiary listed in an EX-21 exhibit is also an SEC filer in its own right. Every row shows `subsidiaryFilerName: \"None\"`.\n\n**Companies examined (parents and their subsidiaries):**\n- **Sky Harbour Group Corp** \u2013 15 subsidiaries (e.g., Sky Harbour LLC, SHOLA, LLC)\n- **Coffee Holding Co Inc** \u2013 Organic Products Trading Company, LLC\n- **theMaven, Inc.** \u2013 4 subsidiaries (e.g., TheStreet, Inc, Maven Coalition, Inc)\n- **Alexandria Real Estate Equities, Inc.** \u2013 3 subsidiaries (e.g., ARE-QRS Corp, Alexandria Real Estate Equities, L.P)\n- **Bon Natural Life Ltd** \u2013 9 subsidiaries (e.g., Shaanxi App-Chem Health Industry Co., Ltd)\n- **Bassett Furniture Industries Inc** \u2013 14 subsidiaries (e.g., Bassett Direct Stores, LLC, Zenith, Inc.)\n- **Boeing Co** \u2013 2 subsidiaries (Astro Limited, Aviall, Inc.)\n\n**Traversal path:** Subsidiary -> RESOLVES_TO -> Company (filer).  \n**Hop result:** The `RESOLVES_TO` hop produced **no matches** for any subsidiary.\n\n**Note:** The traversal was limited to 25 rows but the full dataset shows 2,000 rows matched, all with `subsidiaryFilerName: \"None\"`. The \"Complete per-company expansion\" block was empty, and no verbatim excerpts were retrieved. No accession numbers are available because no filing excerpts were provided for these facts.",
+      "query": "MATCH (s:Subsidiary)-[:SUBSIDIARY_OF]->(parent:Company) WITH s, parent OPTIONAL MATCH (s)-[:RESOLVES_TO]->(filer:Company) RETURN DISTINCT filer.name AS subsidiaryFilerName, parent.name AS parentName, s.name AS subsidiaryName LIMIT 25",
+      "queryLang": "cypher",
+      "rows": 2000,
+      "retrieved": [],
+      "expanded": [],
+      "snippets": 0,
+      "textTerms": [
+       "subsidiary",
+       "exhibit 21",
+       "filer"
+      ],
+      "tokens": 4913,
+      "latency": 7.31,
+      "calls": 3,
+      "evidence": 6073,
+      "entityRecall": 0.0,
+      "entitiesFound": [],
+      "entitiesMissing": [
+       "CCO Holdings"
+      ],
+      "forbidden": [],
+      "cited": [],
+      "correctCites": [],
+      "citePrecision": null,
+      "citeRecall": null
+     }
+    }
+   }
+  }
+ ],
+ "corpus": {
+  "source": "SEC EDGAR monthly XBRL RSS + Form 3/4/5 dataset",
+  "postgres": {
+   "filings": 5732,
+   "companies": 6158,
+   "documents": 66333,
+   "sections": 409,
+   "chunks": 14187,
+   "subsidiaries": 3815,
+   "ownerRows": 76260,
+   "auditors": 20,
+   "size": "145 MB"
+  },
+  "neo4j": {
+   "nodes": 53168,
+   "edges": 96217
+  },
+  "sectionsByItem": [
+   {
+    "item": "1",
+    "label": "Business",
+    "filings": 111,
+    "chars": 4956121,
+    "avg": 44650
+   },
+   {
+    "item": "1A",
+    "label": "Risk Factors",
+    "filings": 91,
+    "chars": 6795504,
+    "avg": 74676
+   },
+   {
+    "item": "1B",
+    "label": "Unresolved Staff Comments",
+    "filings": 5,
+    "chars": 189677,
+    "avg": 37935
+   },
+   {
+    "item": "2",
+    "label": "Properties",
+    "filings": 34,
+    "chars": 253453,
+    "avg": 7455
+   },
+   {
+    "item": "3",
+    "label": "Legal Proceedings",
+    "filings": 18,
+    "chars": 53501,
+    "avg": 2972
+   },
+   {
+    "item": "7",
+    "label": "MD&A",
+    "filings": 115,
+    "chars": 4343993,
+    "avg": 37774
+   },
+   {
+    "item": "7A",
+    "label": "Market Risk",
+    "filings": 35,
+    "chars": 262880,
+    "avg": 7511
+   }
+  ],
+  "graph": {
+   "nodes": [
+    [
+     "Company",
+     6158
+    ],
+    [
+     "Person",
+     37704
+    ],
+    [
+     "Subsidiary",
+     3562
+    ],
+    [
+     "Filing",
+     5732
+    ],
+    [
+     "AuditFirm",
+     12
+    ]
+   ],
+   "edges": [
+    [
+     "FILED",
+     5732
+    ],
+    [
+     "OFFICER_OF",
+     47881
+    ],
+    [
+     "DIRECTOR_OF",
+     30807
+    ],
+    [
+     "OWNS_SHARES",
+     7959
+    ],
+    [
+     "SUBSIDIARY_OF",
+     3815
+    ],
+    [
+     "AUDITED_BY",
+     20
+    ],
+    [
+     "RESOLVES_TO",
+     3
+    ]
+   ]
+  },
+  "timings": [
+   [
+    "parse RSS",
+    0.77
+   ],
+   [
+    "fetch documents",
+    35.0
+   ],
+   [
+    "Form 345",
+    1.31
+   ],
+   [
+    "extract HTML",
+    8.89
+   ],
+   [
+    "load Postgres",
+    5.37
+   ],
+   [
+    "embed",
+    50.46
+   ],
+   [
+    "load Neo4j",
+    7.93
+   ]
+  ],
+  "polk": [
+   {
+    "cik": 1266254,
+    "name": "POLK BENJAMIN",
+    "issuer": "Monster Beverage Corp",
+    "subject": false
+   },
+   {
+    "cik": 1270710,
+    "name": "POLK DENNIS",
+    "issuer": "Concentrix + TD SYNNEX",
+    "subject": true
+   },
+   {
+    "cik": 1678762,
+    "name": "Polk James C",
+    "issuer": "Bank of Hawaii Corp",
+    "subject": false
+   },
+   {
+    "cik": 1192505,
+    "name": "POLK MICHAEL B",
+    "issuer": "Colgate Palmolive Co",
+    "subject": false
+   }
+  ]
+ }
+}
