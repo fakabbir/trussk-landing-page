@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import bench from './graphrag/data/benchmark.json'
-
-const Mark = ({ className = 'h-4 w-4' }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18V6l6 4.5L18 6v12" />
-  </svg>
-)
+import { Mark } from './components/Mark.jsx'
 
 function Eyebrow({ children }) {
   return (
@@ -29,7 +24,7 @@ function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
         <a href="#top" className="flex items-center gap-2.5">
           <span className="flex h-8 w-8 items-center justify-center bg-interactive text-white">
-            <Mark />
+            <Mark className="h-5 w-5" />
           </span>
           <span className="text-lg font-semibold tracking-tight text-text">Trussk</span>
         </a>
