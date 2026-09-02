@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 const tabs = [
   { to: '/graphrag', label: 'Overview', end: true },
   { to: '/graphrag/benchmarks', label: 'Benchmarks' },
+  { to: '/graphrag/statistics', label: 'Statistics' },
   { to: '/graphrag/playground', label: 'Playground' },
 ]
 

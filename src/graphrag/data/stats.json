@@ -1,0 +1,571 @@
+{
+ "window": {
+  "from": "2025-09",
+  "to": "2026-08",
+  "feeds": 12,
+  "xmlMB": 762
+ },
+ "totals": {
+  "filings": 167050,
+  "companies": 10511,
+  "documents": 1904128,
+  "sections": 23649,
+  "chunks": 508714,
+  "subsidiaries": 212124,
+  "ownerRows": 150917,
+  "auditors": 5835,
+  "insiders": 51558,
+  "dbBytes": 3987734528,
+  "hnswBytes": 1033895936,
+  "graphNodes": 430257,
+  "graphEdges": 561144,
+  "docsFetched": 10592,
+  "docsFetchedGB": 19.7
+ },
+ "forms": [
+  [
+   "8-K",
+   63490
+  ],
+  [
+   "424B2",
+   47125
+  ],
+  [
+   "10-Q",
+   16882
+  ],
+  [
+   "10-K",
+   5576
+  ],
+  [
+   "DEF 14A",
+   3931
+  ],
+  [
+   "485BPOS",
+   3853
+  ],
+  [
+   "497",
+   3132
+  ],
+  [
+   "N-CSRS",
+   2875
+  ],
+  [
+   "N-CSR",
+   2841
+  ],
+  [
+   "S-8",
+   2296
+  ],
+  [
+   "8-K/A",
+   1402
+  ],
+  [
+   "20-F",
+   1073
+  ]
+ ],
+ "months": [
+  [
+   "2025-08",
+   362
+  ],
+  [
+   "2025-09",
+   6581
+  ],
+  [
+   "2025-10",
+   8000
+  ],
+  [
+   "2025-11",
+   11776
+  ],
+  [
+   "2025-12",
+   11504
+  ],
+  [
+   "2026-01",
+   11513
+  ],
+  [
+   "2026-02",
+   15902
+  ],
+  [
+   "2026-03",
+   17934
+  ],
+  [
+   "2026-04",
+   16633
+  ],
+  [
+   "2026-05",
+   19594
+  ],
+  [
+   "2026-06",
+   15082
+  ],
+  [
+   "2026-07",
+   14050
+  ],
+  [
+   "2026-08",
+   18119
+  ]
+ ],
+ "sic": [
+  [
+   "(unclassified)",
+   2677
+  ],
+  [
+   "PHARMACEUTICAL PREPARATIONS",
+   631
+  ],
+  [
+   "BLANK CHECKS",
+   426
+  ],
+  [
+   "SERVICES-PREPACKAGED SOFTWARE",
+   315
+  ],
+  [
+   "REAL ESTATE INVESTMENT TRUSTS",
+   278
+  ],
+  [
+   "BIOLOGICAL PRODUCTS, (NO DISGNOSTIC SUBSTANCES)",
+   194
+  ],
+  [
+   "STATE COMMERCIAL BANKS",
+   191
+  ],
+  [
+   "SURGICAL & MEDICAL INSTRUMENTS & APPARATUS",
+   159
+  ],
+  [
+   "FINANCE SERVICES",
+   155
+  ],
+  [
+   "SERVICES-BUSINESS SERVICES, NEC",
+   145
+  ],
+  [
+   "COMMODITY CONTRACTS BROKERS & DEALERS",
+   131
+  ],
+  [
+   "ELECTRIC SERVICES",
+   123
+  ]
+ ],
+ "items": [
+  [
+   "1",
+   5539,
+   352550560,
+   63649,
+   717422
+  ],
+  [
+   "1A",
+   5210,
+   608417255,
+   116779,
+   1060461
+  ],
+  [
+   "1B",
+   63,
+   2000524,
+   31754,
+   127289
+  ],
+  [
+   "2",
+   2683,
+   12281341,
+   4577,
+   390319
+  ],
+  [
+   "3",
+   1518,
+   5126849,
+   3377,
+   117185
+  ],
+  [
+   "7",
+   5609,
+   294551458,
+   52514,
+   473035
+  ],
+  [
+   "7A",
+   3027,
+   16460821,
+   5438,
+   276843
+  ]
+ ],
+ "auditors": [
+  [
+   "Ernst & Young LLP",
+   737
+  ],
+  [
+   "PricewaterhouseCoopers LLP",
+   709
+  ],
+  [
+   "Deloitte & Touche LLP",
+   646
+  ],
+  [
+   "KPMG LLP",
+   595
+  ],
+  [
+   "GRANT THORNTON LLP",
+   207
+  ],
+  [
+   "WithumSmith+Brown, PC",
+   198
+  ],
+  [
+   "DELOITTE & TOUCHE LLP",
+   188
+  ],
+  [
+   "BDO USA, P.C.",
+   123
+  ],
+  [
+   "CBIZ CPAs P.C.",
+   119
+  ],
+  [
+   "Crowe LLP",
+   90
+  ]
+ ],
+ "jurisdictions": [
+  [
+   "Delaware",
+   62504
+  ],
+  [
+   "DE",
+   6175
+  ],
+  [
+   "United Kingdom",
+   5699
+  ],
+  [
+   "Netherlands",
+   3269
+  ],
+  [
+   "United States",
+   3176
+  ],
+  [
+   "China",
+   3152
+  ],
+  [
+   "Germany",
+   2952
+  ],
+  [
+   "Texas",
+   2806
+  ],
+  [
+   "Cayman Islands",
+   2701
+  ],
+  [
+   "California",
+   2433
+  ],
+  [
+   "Canada",
+   2393
+  ],
+  [
+   "Australia",
+   2343
+  ]
+ ],
+ "topParents": [
+  [
+   "Ventas, Inc.",
+   2780
+  ],
+  [
+   "HCA Healthcare, Inc.",
+   2476
+  ],
+  [
+   "AES CORP",
+   1577
+  ],
+  [
+   "COMCAST CORP",
+   1476
+  ],
+  [
+   "Blackstone Inc.",
+   1423
+  ],
+  [
+   "Starwood Real Estate Income Trust, Inc.",
+   1388
+  ],
+  [
+   "Apollo Global Management, Inc.",
+   1347
+  ],
+  [
+   "HEALTHPEAK PROPERTIES, INC.",
+   1325
+  ],
+  [
+   "KKR & Co. Inc.",
+   1259
+  ],
+  [
+   "TENET HEALTHCARE CORP",
+   1200
+  ],
+  [
+   "LENNAR CORP /NEW/",
+   1175
+  ],
+  [
+   "THERMO FISHER SCIENTIFIC INC.",
+   1168
+  ]
+ ],
+ "subDist": [
+  [
+   "1",
+   275
+  ],
+  [
+   "2-5",
+   950
+  ],
+  [
+   "6-20",
+   1261
+  ],
+  [
+   "21-100",
+   1079
+  ],
+  [
+   "101-500",
+   439
+  ],
+  [
+   "500+",
+   62
+  ]
+ ],
+ "roles": [
+  [
+   "other",
+   4044
+  ],
+  [
+   "ten_pct_owner",
+   19542
+  ],
+  [
+   "director",
+   70167
+  ],
+  [
+   "officer",
+   86180
+  ]
+ ],
+ "multiCompany": [
+  [
+   "1 company",
+   46060
+  ],
+  [
+   "2",
+   4345
+  ],
+  [
+   "3",
+   800
+  ],
+  [
+   "4-5",
+   239
+  ],
+  [
+   "6+",
+   114
+  ]
+ ],
+ "tables": [
+  [
+   "section_chunk",
+   2493014016
+  ],
+  [
+   "filing_section",
+   724860928
+  ],
+  [
+   "filing_document",
+   561872896
+  ],
+  [
+   "subsidiary",
+   71729152
+  ],
+  [
+   "filing",
+   66076672
+  ],
+  [
+   "reporting_owner",
+   50241536
+  ],
+  [
+   "company",
+   6922240
+  ],
+  [
+   "filing_auditor",
+   1081344
+  ]
+ ],
+ "graph": {
+  "nodes": [
+   [
+    "Filing",
+    167050
+   ],
+   [
+    "Subsidiary",
+    200869
+   ],
+   [
+    "Person",
+    51558
+   ],
+   [
+    "Company",
+    10511
+   ],
+   [
+    "AuditFirm",
+    269
+   ]
+  ],
+  "edges": [
+   [
+    "SUBSIDIARY_OF",
+    212124
+   ],
+   [
+    "FILED",
+    167050
+   ],
+   [
+    "OFFICER_OF",
+    86180
+   ],
+   [
+    "DIRECTOR_OF",
+    70167
+   ],
+   [
+    "OWNS_SHARES",
+    19542
+   ],
+   [
+    "AUDITED_BY",
+    5835
+   ],
+   [
+    "RESOLVES_TO",
+    1232
+   ]
+  ]
+ },
+ "pipeline": [
+  [
+   "fetch feeds",
+   0.9
+  ],
+  [
+   "parse 12 feeds",
+   4.2
+  ],
+  [
+   "fetch 10,592 docs",
+   118.0
+  ],
+  [
+   "Form 3/4/5",
+   0.4
+  ],
+  [
+   "extract HTML",
+   19.0
+  ],
+  [
+   "upload to S3",
+   12.0
+  ],
+  [
+   "load RDS",
+   6.0
+  ],
+  [
+   "embed 508,714 chunks",
+   87.0
+  ],
+  [
+   "HNSW + graph",
+   4.0
+  ]
+ ],
+ "measured": {
+  "embedRate": 97,
+  "uploadMBs": 0.7,
+  "s3PullSeconds": 3,
+  "secRateLimit": 10,
+  "compressionPct": 26
+ }
+}

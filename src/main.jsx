@@ -6,6 +6,7 @@ import { Shell } from './graphrag/components/Shell.jsx'
 import Home from './graphrag/pages/Home.jsx'
 import Benchmarks from './graphrag/pages/Benchmarks.jsx'
 import Playground from './graphrag/pages/Playground.jsx'
+import Statistics from './graphrag/pages/Statistics.jsx'
 import './index.css'
 
 function GraphRAGRoutes() {
@@ -15,6 +16,7 @@ function GraphRAGRoutes() {
         <Route index element={<Home />} />
         <Route path="benchmarks" element={<Benchmarks />} />
         <Route path="playground" element={<Playground />} />
+        <Route path="statistics" element={<Statistics />} />
       </Routes>
     </Shell>
   )
