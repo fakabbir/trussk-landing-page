@@ -327,7 +327,7 @@ export default function Benchmarks() {
                 'The same number of LLM calls — 2 for SQL and GraphRAG, 1 for Vector RAG.',
                 'A complete schema. text-to-SQL is shown subsidiary and reporting_owner, so even the multi-hop answers are reachable by joins.',
                 'The same naming-convention hint in both schema docs, including that person names are stored surname-first.',
-                'One repair attempt each, triggered by an exception or an empty result.',
+                'One repair attempt each, triggered by an exception or an empty result — capped at two query-writing calls, never three.',
                 'The same LIMIT/fan-out guardrail, applied identically to both query languages.',
                 'Two of four question types selected so that the graph is the wrong tool for them.',
               ].map((s) => (
@@ -361,6 +361,61 @@ export default function Benchmarks() {
             </ul>
           </Card>
         </div>
+
+        <Card className="mt-4">
+          <h3 className="font-serif text-lg">How often each mode used its repair</h3>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-secondary">
+            Both query-writing modes get the same allowance: if the first query throws or returns
+            zero rows, the model sees the error and writes one correction. Equal budget, very
+            unequal use.
+          </p>
+          <table className="mt-3 w-full border-collapse font-mono text-[11.5px] tabular-nums">
+            <thead>
+              <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-secondary">
+                <th className="py-1.5 pr-3 font-medium">Mode</th>
+                <th className="py-1.5 pr-3 text-right font-medium">Repaired</th>
+                <th className="py-1.5 pr-3 text-right font-medium">T1</th>
+                <th className="py-1.5 pr-3 text-right font-medium">T2</th>
+                <th className="py-1.5 pr-3 text-right font-medium">T3</th>
+                <th className="py-1.5 text-right font-medium">T4</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['text-to-SQL', '7/60', '3', '0', '1', '3', 'text-secondary'],
+                ['GraphRAG', '34/60', '4', '9', '6', '15', 'text-text'],
+                ['Vector RAG', '0/60', '—', '—', '—', '—', 'text-helper'],
+              ].map(([label, tot, ...rest]) => {
+                const cls = rest.pop()
+                return (
+                  <tr key={label} className={`border-b border-border last:border-0 ${cls}`}>
+                    <td className="py-1.5 pr-3">{label}</td>
+                    <td className="py-1.5 pr-3 text-right font-semibold">{tot}</td>
+                    {rest.map((v, i) => (
+                      <td key={i} className="py-1.5 pr-3 text-right">
+                        {v}
+                        {v !== '—' && <span className="text-helper">/15</span>}
+                      </td>
+                    ))}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <p className="mt-3 text-[13.5px] leading-relaxed text-secondary">
+            GraphRAG leaned on the repair <strong className="text-text">five times as often</strong>,
+            and on T4 it needed one on every single attempt — the first Cypher matches
+            <code className="mx-1 font-mono text-[12px]">nameNormalized</code> exactly, gets zero
+            rows, and the correction frequently misses too. That is most of the gap between its
+            780,500 tokens and text-to-SQL&rsquo;s 158,171.
+          </p>
+          <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
+            The trigger is also not as neutral as it looks. An over-broad SQL join returns many
+            rows, so it never trips the zero-row condition even when the answer is wrong, while an
+            exact graph property match returns nothing and earns a free second try. Same rule,
+            unequal benefit — in GraphRAG&rsquo;s favour.
+          </p>
+        </Card>
       </Section>
 
       <Section label="Dataset" note={`${fmt(totalChars)} characters of narrative text extracted`}>
