@@ -5,9 +5,12 @@ import data from '../data/benchmark.json'
 
 const PRESETS = data.questions.map((q) => ({
  id: q.id,
- label: q.kind.replace(/\s*\(THE KILLER QUERY\)/i, ' ★'),
+ label: q.id + (q.id === data.killerId ? ' ★' : ''),
+ type: q.type,
  question: q.question,
 }))
+
+const KILLER = PRESETS.find((p) => p.id === data.killerId)
 
 const EXTRAS = [
   { id: null, label: 'Boeing’s subsidiaries', question: 'Which subsidiaries does Boeing disclose, and in which jurisdictions?' },
@@ -65,6 +68,9 @@ function Pane({ mode, state }) {
   } else if (state?.error) {
  status = 'error'
  label = 'error'
+  } else if (r?.timeout) {
+ status = 'error'
+ label = 'timed out'
   } else if (r) {
  if (sc) {
  if (sc.correct) [status, label] = ['pass', 'pass']
@@ -116,7 +122,16 @@ function Pane({ mode, state }) {
           </div>
         )}
 
-        {r && !state.busy && (
+        {r?.timeout && !state.busy && (
+          <div className="p-4">
+            <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+              exceeded the request deadline
+            </p>
+            <p className="text-[12.5px] leading-relaxed text-support-error">{r.error}</p>
+          </div>
+        )}
+
+        {r && !r.timeout && !state.busy && (
           <>
             {(r.sql || r.cypher) && (
               <div className="p-4">
@@ -252,7 +267,7 @@ function Pane({ mode, state }) {
 }
 
 export default function Playground() {
- const [question, setQuestion] = useState(PRESETS[2]?.question ?? '')
+ const [question, setQuestion] = useState(KILLER?.question ?? PRESETS[0].question)
  const [selected, setSelected] = useState(new Set(MODES))
  const [panes, setPanes] = useState({})
  const [busy, setBusy] = useState(false)
@@ -313,16 +328,21 @@ export default function Playground() {
  setBusy(false)
   }
 
- const chips = [...PRESETS, ...EXTRAS]
 
  return (
     <>
       <PageHead eyebrow="Live · three architectures · one question" title="Playground">
         <p>
           Ask anything of the loaded SEC filings. text-to-SQL, Vector RAG and GraphRAG run in
- parallel, each showing the query it wrote and the evidence it found. The four preset
- questions marked with an ID have verified ground truth, so those get a real verdict —
- free-form questions show evidence and cost, not a score.
+ parallel, each showing the query it wrote and the evidence it found. The twenty preset
+ questions have hand-verified ground truth, so those get a real verdict — free-form
+ questions show evidence and cost, not a score.
+        </p>
+        <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
+          Queries carry a 45s Postgres statement timeout and a 50s request deadline. text-to-SQL
+          hits it on the multi-hop questions — it writes joins across subsidiary, filing_section
+          and reporting_owner without narrowing first, measured at 92s average and 445s worst case.
+          That timeout is the honest result, not a broken page.
         </p>
       </PageHead>
 
@@ -426,19 +446,46 @@ export default function Playground() {
           </div>
 
           <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
-            {chips.map((cq, i) => (
-              <button
- key={i}
- type="button"
- onClick={() => setQuestion(cq.question)}
- className="flex items-center gap-2 border border-border bg-layer px-3 py-1.5 text-[12px] text-secondary transition-colors hover:border-interactive hover:text-text"
-              >
-                {cq.id && (
-                  <span className="font-mono text-[10px] font-semibold text-interactive">{cq.id}</span>
-                )}
-                {cq.label}
-              </button>
+            {data.types.map((t) => (
+              <div key={t.id} className="flex w-full flex-wrap items-center gap-2">
+                <span
+                  className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper"
+                  title={`expected to win: ${t.expect}`}
+                >
+                  {t.kind}
+                </span>
+                {PRESETS.filter((p) => p.type === t.id).map((cq) => (
+                  <button
+                    key={cq.id}
+                    type="button"
+                    onClick={() => setQuestion(cq.question)}
+                    title={cq.question}
+                    className={`cursor-pointer border px-2.5 py-1 font-mono text-[11.5px] transition-colors ${
+                      question === cq.question
+                        ? 'border-interactive bg-interactive-light text-interactive'
+                        : 'border-border bg-layer text-secondary hover:border-interactive hover:text-text'
+                    }`}
+                  >
+                    {cq.label}
+                  </button>
+                ))}
+              </div>
             ))}
+            <div className="flex w-full flex-wrap items-center gap-2 border-t border-border pt-2.5">
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper">
+                free-form · no ground truth
+              </span>
+              {EXTRAS.map((cq) => (
+                <button
+                  key={cq.label}
+                  type="button"
+                  onClick={() => setQuestion(cq.question)}
+                  className="cursor-pointer border border-border bg-layer px-2.5 py-1 text-[12px] text-secondary transition-colors hover:border-interactive hover:text-text"
+                >
+                  {cq.label}
+                </button>
+              ))}
+            </div>
           </div>
         </form>
       </Section>

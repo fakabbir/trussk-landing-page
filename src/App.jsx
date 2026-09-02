@@ -132,8 +132,8 @@ function Hero() {
               </div>
               <dl className="divide-y divide-border">
                 {[
-                  { label: 'Answers with a source citation', val: '100%', note: 'GraphRAG' },
-                  { label: 'Confident falsehoods', val: '0', note: 'across 12 runs' },
+                  { label: 'Answers with a source citation', val: '100%', note: 'GraphRAG, 44 passes' },
+                  { label: 'Confident falsehoods', val: '0', note: 'across 60 runs' },
                   { label: 'Unverifiable claims', val: '0', note: 'every hop carries filing_id' },
                 ].map((s) => (
                   <div key={s.label} className="flex items-baseline justify-between gap-4 px-5 py-4">

@@ -45,12 +45,13 @@ export default function Home() {
  return (
     <>
       <PageHead
- eyebrow={`SEC EDGAR · ${fmt(c.postgres.filings)} filings · 36 scored runs`}
+ eyebrow={`SEC EDGAR · ${fmt(c.postgres.filings)} filings · 180 scored runs`}
  title="Three ways to ask a filing a question"
       >
         <p>
-          One month of SEC disclosure loaded into Postgres and Neo4j, then queried four ways
- by the same model. The finding is not that SQL cannot join. It is that{' '}
+          Twelve months of SEC disclosure loaded into Postgres and Neo4j, then queried three
+ ways by the same model — twenty questions, three trials each. The finding is not that
+ SQL cannot join. It is that{' '}
           <em className="text-text not-italic">identity</em> and{' '}
           <em className="text-text not-italic">provenance</em> are structure you either
  store or reconstruct — and reconstructing them is where the answers go wrong.
@@ -59,14 +60,14 @@ export default function Home() {
 
       <Section>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <Stat value={`${data.totals.graphrag.passes}/12`} label="GraphRAG passes"/>
-          <Stat value={`${data.totals.text_to_sql.passes}/12`} label="text-to-SQL passes"/>
-          <Stat value={`${data.totals.vector_rag.passes}/12`} label="Vector RAG passes"/>
+          <Stat value={`${data.totals.graphrag.passes}/60`} label="GraphRAG passes"/>
+          <Stat value={`${data.totals.text_to_sql.passes}/60`} label="text-to-SQL passes"/>
+          <Stat value={`${data.totals.vector_rag.passes}/60`} label="Vector RAG passes"/>
           <Stat value={data.totals.text_to_sql.halluc} label="Confident falsehoods from SQL"/>
         </div>
       </Section>
 
-      <Section label="Quick compare" note="one square per trial · rows are questions">
+      <Section label="Quick compare" note="rows are question types · 5 questions × 3 trials each">
         <CompareMatrix />
         <Legend />
         <p className="mt-5 text-[13.5px] leading-relaxed text-secondary">
@@ -83,64 +84,42 @@ export default function Home() {
           <Card>
             <p className="font-serif text-3xl tabular-nums text-interactive">0</p>
             <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-secondary">
- of 409 narrative sections mention the executive
+              of 5,210 risk-factor sections mention the executive
             </p>
             <p className="mt-3 text-[13.5px] leading-relaxed text-secondary">
-              The subject of the hardest question is Dennis Polk. The string “polk” appears in{' '}
-              <strong className="text-text">none</strong> of the extracted 10-K sections —
- his name exists only in Form 4 ownership filings, a different document type that is
- never embedded alongside risk-factor prose.
+              The subject of the killer query is Monica Lozano. The string “lozano” appears in{' '}
+              <strong className="text-text">none</strong> of the extracted Item 1A sections — her
+              name exists only in Form 3/4/5 ownership filings, a different document type that is
+              never embedded alongside risk-factor prose. There is no chunk to retrieve.
             </p>
-            <p className="mt-4 font-serif text-3xl tabular-nums text-interactive">0</p>
+            <p className="mt-4 font-serif text-3xl tabular-nums text-interactive">1 / 151</p>
             <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-secondary">
- of 220 subsidiary names appear in the parent’s own Item 1A
+              subsidiary names that appear in their parent’s own Item 1A
             </p>
             <p className="mt-3 text-[13.5px] leading-relaxed text-secondary">
-              Role, ownership and risk live in three disjoint documents, so no chunk in the corpus
- contains the combination the question asks about. Not a chunk-size problem, and not
- an embedding-quality problem.
+              Role, ownership and risk are written in three separate documents by three separate
+              teams, so no chunk in the corpus contains the combination the question asks about.
+              Not a chunk-size problem, and not an embedding-quality problem.
             </p>
           </Card>
 
           <Card>
-            <h3 className="font-serif text-lg">Four different people named Polk</h3>
+            <h3 className="font-serif text-lg">Vector RAG cannot filter by entity</h3>
             <p className="mt-2 text-[13.5px] leading-relaxed text-secondary">
- text-to-SQL matched{' '}
-              <code className="font-mono text-[12px] text-support-warning">owner_name ILIKE '%polk%'</code>{' '}
- and reported all four as one person. The graph keys{' '}
-              <code className="font-mono text-[12px] text-interactive">:Person</code> by CIK, so
- identity resolves before any traversal begins.
+              Asked what supply-chain risks <strong className="text-text">Moderna</strong>
+              disclosed, similarity search returned risk-factor chunks from Entegris, Hayward,
+              Open Text, Arrowhead and NVIDIA. All are genuinely about supply chain — none are
+              Moderna.
             </p>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full border-collapse font-mono text-[11.5px] tabular-nums">
-                <thead>
-                  <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-secondary">
-                    <th className="py-1.5 pr-3 font-medium">owner_cik</th>
-                    <th className="py-1.5 pr-3 font-medium">name</th>
-                    <th className="py-1.5 font-medium">issuer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {c.polk.map((p) => (
-                    <tr
- key={p.cik}
- className={`border-b border-border last:border-0 ${
- p.subject ? 'bg-interactive-light text-text' : 'text-secondary'
-                      }`}
-                    >
-                      <td className="py-1.5 pr-3">{p.cik}</td>
-                      <td className={`py-1.5 pr-3 ${p.subject ? 'font-semibold' : ''}`}>
-                        {p.name}
-                      </td>
-                      <td className="py-1.5">{p.issuer}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <p className="mt-3 text-[13.5px] leading-relaxed text-secondary">
+              Across 508,714 chunks from 5,210 companies, a company name is not a strong enough
+              signal in embedding space to outweigh topical similarity. On a single month of
+              filings the same question passed; at this scale it fails{' '}
+              <strong className="text-text">12 of 15 times</strong>.
+            </p>
             <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
-              Highlighted row is the actual subject. The other three are distinct CIKs — distinct
- people.
+              Scale broke it. That is not a result we predicted, and it is the clearest argument
+              on this page for structural retrieval over similarity.
             </p>
           </Card>
         </div>
@@ -213,23 +192,6 @@ export default function Home() {
                 </div>
               ))}
             </dl>
-          </Card>
-          <Card>
-            <h3 className="font-mono text-[11px] uppercase tracking-wider text-secondary">
-              Neo4j — projection of it
-            </h3>
-            <dl className="mt-3 grid grid-cols-2 gap-y-1.5 font-mono text-[12px] tabular-nums">
-              {c.graph.edges.map(([k, v]) => (
-                <div key={k} className="col-span-2 flex justify-between gap-4">
-                  <dt className="text-secondary">[:{k}]</dt>
-                  <dd className="text-text">{fmt(v)}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
-              Every relationship carries filingId, so a traversal result is not “these entities are
- connected” but “connected according to document X”.
-            </p>
           </Card>
         </div>
       </Section>
