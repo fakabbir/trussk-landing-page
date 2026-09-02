@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Card, PageHead, Section } from '../components/Shell'
 import { Attempts, CompareMatrix } from '../components/CompareMatrix'
 import { Pipeline } from '../components/Pipeline'
+import { SourceDocuments } from '../components/SourceDocuments'
 import { Walkthrough } from '../components/Walkthrough'
 import { MODE_META, MODES, fmt } from '../api'
 import data from '../data/benchmark.json'
@@ -88,6 +89,13 @@ export default function Home() {
             Full methodology →
           </Link>
         </p>
+      </Section>
+
+      <Section
+        label="The source documents"
+        note="what a 10-K, an Item and an Exhibit actually are"
+      >
+        <SourceDocuments />
       </Section>
 
       <Section label="Why similarity search cannot reach the answer" note="measured, not asserted">
