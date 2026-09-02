@@ -77,7 +77,8 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section label="Quick compare" note="rows are question types · 5 questions, each asked 3 times">
+      <Section id="quick-compare"
+        label="Quick compare" note="rows are question types · 5 questions, each asked 3 times">
         <CompareMatrix />
         <Attempts />
         <p className="mt-5 text-[13.5px] leading-relaxed text-secondary">
@@ -92,13 +93,15 @@ export default function Home() {
       </Section>
 
       <Section
+        id="source-documents"
         label="The source documents"
         note="what a 10-K, an Item and an Exhibit actually are"
       >
         <SourceDocuments />
       </Section>
 
-      <Section label="Why similarity search cannot reach the answer" note="measured, not asserted">
+      <Section id="why-vector-fails"
+        label="Why similarity search cannot reach the answer" note="measured, not asserted">
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <p className="font-serif text-3xl tabular-nums text-interactive">0</p>
@@ -145,6 +148,7 @@ export default function Home() {
       </Section>
 
       <Section
+        id="walkthrough"
         label="Why Vector RAG fails, and how GraphRAG gets the answer"
         note="one query, traced step by step against the live corpus"
       >
@@ -152,13 +156,15 @@ export default function Home() {
       </Section>
 
       <Section
+        id="pipeline"
         label="How it works, end to end"
         note="raw filing → preprocessing → storage → query execution"
       >
         <Pipeline />
       </Section>
 
-      <Section label="Architecture" note="two stores, one provenance key">
+      <Section id="architecture"
+        label="Architecture" note="two stores, one provenance key">
         <div className="grid gap-4 md:grid-cols-3">
           <ArchColumn
  title="text-to-SQL"

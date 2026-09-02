@@ -251,7 +251,8 @@ export default function Benchmarks() {
         </p>
       </PageHead>
 
-      <Section label="Results" note="20 questions, each asked 3 times">
+      <Section id="results"
+        label="Results" note="20 questions, each asked 3 times">
         <CompareMatrix />
         <Attempts />
 
@@ -305,7 +306,8 @@ export default function Benchmarks() {
         </p>
       </Section>
 
-      <Section label="Every attempt" note="click a row to open its case study">
+      <Section id="every-attempt"
+        label="Every attempt" note="click a row to open its case study">
         <OutcomeGrid onPick={setOpenId} />
         <Legend />
         <p className="mt-4 max-w-3xl text-[13.5px] leading-relaxed text-secondary">
@@ -317,7 +319,8 @@ export default function Benchmarks() {
         </p>
       </Section>
 
-      <Section label="Keeping it fair" note="a rigged baseline proves nothing">
+      <Section id="keeping-it-fair"
+        label="Keeping it fair" note="a rigged baseline proves nothing">
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
             <h3 className="font-serif text-lg">What both baselines get</h3>
@@ -419,7 +422,8 @@ export default function Benchmarks() {
         </Card>
       </Section>
 
-      <Section label="Dataset" note={`${fmt(totalChars)} characters of narrative text extracted`}>
+      <Section id="dataset"
+        label="Dataset" note={`${fmt(totalChars)} characters of narrative text extracted`}>
         <div className="grid gap-4 lg:grid-cols-2">
           <Card>
             <h3 className="font-mono text-[11px] uppercase tracking-wider text-secondary">
@@ -495,7 +499,8 @@ export default function Benchmarks() {
         </div>
       </Section>
 
-      <Section label="Case studies" note="the actual query, answer and score for each question">
+      <Section id="case-studies"
+        label="Case studies" note="the actual query, answer and score for each question">
         <div className="mb-5 space-y-2">
           {data.types.map((t) => (
             <div key={t.id} className="flex flex-wrap items-center gap-2">
@@ -530,6 +535,7 @@ export default function Benchmarks() {
       </Section>
 
       <Section
+        id="caveats"
         label="Where this does not support the thesis"
         note="reported because it matters more than the wins"
       >

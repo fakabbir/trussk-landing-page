@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const tabs = [
@@ -8,6 +9,7 @@ const tabs = [
 ]
 
 export function Shell({ children }) {
+ useHashScroll()
  const { pathname } = useLocation()
 
  return (
@@ -93,18 +95,69 @@ export function PageHead({ eyebrow, title, children }) {
   )
 }
 
-export function Section({ label, note, children, className = '' }) {
+/* Sections are individually linkable so a specific result can be sent to
+   someone. `id` is written by hand rather than slugged from `label`, because a
+   copy edit to a heading would otherwise silently break every shared link. */
+export function Section({ id, label, note, children, className = '' }) {
+ const href = id ? `${window.location.pathname}#${id}` : null
+
  return (
-    <section className={`mx-auto max-w-6xl px-6 py-10 ${className}`}>
+    <section id={id} className={`mx-auto max-w-6xl px-6 py-10 scroll-mt-20 ${className}`}>
       {label && (
-        <div className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-2.5">
-          <h2 className="font-serif text-xl tracking-tight">{label}</h2>
+        <div className="group mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-2.5">
+          <h2 className="font-serif text-xl tracking-tight">
+            {label}
+            {id && (
+              <a
+                href={`#${id}`}
+                onClick={() => {
+                  // Put the absolute URL on the clipboard, since that is what
+                  // gets pasted into chat. Failing silently is fine - the href
+                  // still navigates and the address bar still updates.
+                  try {
+                    navigator.clipboard?.writeText(window.location.origin + href)
+                  } catch { /* no clipboard permission */ }
+                }}
+                aria-label={`Link to "${label}"`}
+                title="Copy a link to this section"
+                className="ml-2 align-middle font-mono text-[15px] text-helper opacity-0 transition-opacity hover:text-interactive focus-visible:opacity-100 group-hover:opacity-100"
+              >
+                #
+              </a>
+            )}
+          </h2>
           {note && <span className="font-mono text-xs text-secondary">{note}</span>}
         </div>
       )}
       {children}
     </section>
   )
+}
+
+
+/* A SPA does not scroll to a fragment on first paint: the element does not exist
+   until React has rendered. Retry briefly, because the benchmark pages import a
+   290 KB JSON blob and the target can appear a frame or two late. */
+export function useHashScroll() {
+ const { pathname, hash } = useLocation()
+
+ useEffect(() => {
+ if (!hash) {
+      window.scrollTo(0, 0)
+ return
+    }
+ let tries = 0
+ const id = hash.slice(1)
+ const tick = () => {
+ const el = document.getElementById(id)
+ if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+ return
+      }
+ if (++tries < 20) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [pathname, hash])
 }
 
 export function Card({ children, className = '' }) {
