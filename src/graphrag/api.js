@@ -43,11 +43,18 @@ export function getMeta() {
   return req('/api/meta')
 }
 
-export function ask({ question, mode, questionId, signal }) {
+export function ask({ question, mode, questionId, model, signal }) {
   return req('/api/ask', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question, mode, question_id: questionId || null }),
+    // model is optional: the API falls back to the benchmarked model, and
+    // rejects any id that is not in its own catalogue.
+    body: JSON.stringify({
+      question,
+      mode,
+      question_id: questionId || null,
+      model: model || null,
+    }),
     signal,
   })
 }

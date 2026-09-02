@@ -81,7 +81,9 @@ export default function Home() {
         <Attempts />
         <p className="mt-5 text-[13.5px] leading-relaxed text-secondary">
           Scoring is programmatic against hand-verified ground truth — required entities,
- forbidden entities, and citation precision/recall. No LLM judge.{' '}
+ forbidden entities, and citation precision/recall. No LLM judge. All figures were measured
+ on <strong className="text-text">deepseek-v4-flash</strong>; the playground can swap in
+ Bedrock models, which changes the answers but not these numbers.{' '}
           <Link to="/graphrag/benchmarks" className="text-interactive hover:underline">
             Full methodology →
           </Link>

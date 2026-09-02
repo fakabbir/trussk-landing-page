@@ -12,6 +12,14 @@ const PRESETS = data.questions.map((q) => ({
 
 const KILLER = PRESETS.find((p) => p.id === data.killerId)
 
+/* The model every published number was measured on. Hard-coded as the default
+   so the playground opens on the benchmarked configuration even before
+   /api/meta answers. */
+const BENCH_MODEL_ID = 'deepseek/deepseek-v4-flash'
+
+const paneKey = ({ mode, model }) => `${mode}::${model}`
+const shortModel = (id) => (id || '').split('/').pop()
+
 const EXTRAS = [
   { id: null, label: 'Boeing’s subsidiaries', question: 'Which subsidiaries does Boeing disclose, and in which jurisdictions?' },
   { id: null, label: 'Who audits whom', question: 'Which companies does Ernst & Young audit, and what is its PCAOB firm id?' },
@@ -55,7 +63,7 @@ function renderAnswer(text, forbidden) {
  return html.replace(/\n+/g, '<br/>')
 }
 
-function Pane({ mode, state }) {
+function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
  const meta = MODE_META[mode]
  const r = state?.result
  const sc = r?.score
@@ -92,6 +100,16 @@ function Pane({ mode, state }) {
           {meta.label}
         </h3>
         <p className="mt-0.5 font-mono text-[10.5px] text-secondary">{meta.role}</p>
+        {showModel && (
+          <p className="mt-1.5 flex flex-wrap items-center gap-1.5 font-mono text-[10px]">
+            <span className={isBenchmark ? 'text-interactive' : 'text-support-warning'}>
+              {modelLabel || shortModel(model)}
+            </span>
+            <span className={isBenchmark ? 'text-helper' : 'text-support-warning'}>
+              {isBenchmark ? '· benchmarked' : '· not benchmarked'}
+            </span>
+          </p>
+        )}
         <div className="mt-2.5 flex items-center gap-2">
           <Pill status={status}>{label}</Pill>
           {state?.elapsed != null && (
@@ -257,7 +275,7 @@ function Pane({ mode, state }) {
         {!state && (
           <div className="p-4">
             <p className="font-mono text-[11px] leading-relaxed text-helper">
-              Pick a question above, or write your own, then press <b>Ask all three</b>.
+              Pick a question above, or write your own, then press <b>Ask</b>.
             </p>
           </div>
         )}
@@ -269,6 +287,11 @@ function Pane({ mode, state }) {
 export default function Playground() {
  const [question, setQuestion] = useState(KILLER?.question ?? PRESETS[0].question)
  const [selected, setSelected] = useState(new Set(MODES))
+ /* Models come from /api/meta, so the UI never offers one the gateway has not
+    been configured with. Until it loads, the benchmarked model is the only
+    option -- that keeps the default identical to what the numbers were measured
+    on rather than to whatever happens to be first in a list. */
+ const [models, setModels] = useState([BENCH_MODEL_ID])
  const [panes, setPanes] = useState({})
  const [busy, setBusy] = useState(false)
  const [health, setHealth] = useState(null)
@@ -280,6 +303,21 @@ export default function Playground() {
       .then(setHealth)
       .catch((e) => setHealth({ error: e.message }))
   }, [])
+
+ const catalogue = health?.models || []
+ const byId = Object.fromEntries(catalogue.map((m) => [m.id, m]))
+ const benchId = health?.benchmarkModel || BENCH_MODEL_ID
+ const chosen = models.filter((id) => !catalogue.length || id in byId)
+ const offBenchmark = chosen.filter((id) => id !== benchId)
+
+ function toggleModel(id) {
+ setModels((prev) => {
+ // never leave zero models selected; the run would silently do nothing
+ if (prev.includes(id)) return prev.length === 1 ? prev : prev.filter((x) => x !== id)
+ if (prev.length >= 3) return prev            // three panes per mode is already a lot
+ return [...prev, id]
+    })
+  }
 
  function toggle(m) {
  setSelected((prev) => {
@@ -295,32 +333,37 @@ export default function Playground() {
 
  const modes = MODES.filter((m) => selected.has(m))
  if (!modes.length) return
+ const picked = chosen.length ? chosen : [benchId]
+ // One pane per (mode, model). With one model this is exactly the old grid.
+ const jobs = modes.flatMap((mode) => picked.map((model) => ({ mode, model })))
 
  const preset = [...PRESETS].find((p) => p.question === q)
  const controller = new AbortController()
  abortRef.current = controller
 
  setBusy(true)
- setPanes(Object.fromEntries(modes.map((m) => [m, { busy: true }])))
+ setPanes(Object.fromEntries(jobs.map((j) => [paneKey(j), { busy: true }])))
 
  const started = Date.now()
  await Promise.all(
- modes.map(async (mode) => {
+ jobs.map(async ({ mode, model }) => {
+ const key = paneKey({ mode, model })
  try {
  const result = await ask({
  question: q,
  mode,
+ model,
  questionId: preset?.id || null,
  signal: controller.signal,
           })
  setPanes((p) => ({
             ...p,
- [mode]: { busy: false, result, elapsed: (Date.now() - started) / 1000 },
+ [key]: { busy: false, result, elapsed: (Date.now() - started) / 1000 },
           }))
         } catch (e) {
  setPanes((p) => ({
             ...p,
- [mode]: { busy: false, error: e.message, elapsed: (Date.now() - started) / 1000 },
+ [key]: { busy: false, error: e.message, elapsed: (Date.now() - started) / 1000 },
           }))
         }
       }),
@@ -337,6 +380,21 @@ export default function Playground() {
  parallel, each showing the query it wrote and the evidence it found. The twenty preset
  questions have hand-verified ground truth, so those get a real verdict — free-form
  questions show evidence and cost, not a score.
+        </p>
+        <p className="mt-3 text-[14px] leading-relaxed text-secondary">
+          All three modes call one OpenAI-compatible endpoint —{' '}
+          <a
+            href="https://github.com/maximhq/bifrost"
+            target="_blank"
+            rel="noreferrer"
+            className="text-interactive hover:underline"
+          >
+            Bifrost
+          </a>
+          , an open-source LLM gateway — so the model is a request parameter rather than a
+          deployment choice, and every mode is guaranteed to be using the same one. Pick a
+          different model below to see the same retrieval architecture on a different writer of
+          SQL and Cypher.
         </p>
         <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
           Queries carry a 45s Postgres statement timeout and a 50s request deadline. text-to-SQL
@@ -356,6 +414,14 @@ export default function Playground() {
               Benchmarks
             </a>{' '}
  show the same panes with recorded results.
+          </div>
+        )}
+
+        {health?.stats?.gateway?.enabled && health.stats.gateway.ok === false && (
+          <div className="mb-5 border border-support-warning bg-support-warning/10 px-4 py-3 text-[13.5px] text-support-warning">
+            <b>The LLM gateway is not answering.</b> Model selection is unavailable and requests
+            will fail until Bifrost is back:{' '}
+            <code className="font-mono text-[12px]">{health.stats.gateway.error}</code>
           </div>
         )}
 
@@ -441,7 +507,12 @@ export default function Playground() {
  disabled={busy || !API_CONFIGURED || !question.trim()}
  className="ml-auto bg-interactive px-5 py-2.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-default disabled:opacity-40"
             >
-              {busy ? 'Running…' : 'Ask all three'}
+              {busy
+                ? 'Running…'
+                : (() => {
+                    const n = MODES.filter((m) => selected.has(m)).length * (chosen.length || 1)
+                    return n === 1 ? 'Ask' : `Ask all ${n}`
+                  })()}
             </button>
           </div>
 
@@ -487,14 +558,89 @@ export default function Playground() {
               ))}
             </div>
           </div>
+
+          {/* ── model picker ─────────────────────────────────────────────── */}
+          {catalogue.length > 0 && (
+            <div className="mt-4 border-t border-border pt-3.5">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper">
+                  model &middot; pick up to 3
+                </span>
+                <span className="font-mono text-[10px] text-helper">
+                  routed through Bifrost &rarr; DeepSeek &amp; AWS Bedrock
+                </span>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {catalogue.map((m) => {
+                  const on = chosen.includes(m.id)
+                  const atCap = !on && chosen.length >= 3
+                  return (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => toggleModel(m.id)}
+                      disabled={atCap}
+                      title={`${m.id}${m.note ? ` — ${m.note}` : ''}`}
+                      className={`border px-2.5 py-1 text-left text-[11.5px] transition-colors ${
+                        on
+                          ? m.benchmark
+                            ? 'border-interactive bg-interactive-light text-interactive'
+                            : 'border-support-warning bg-support-warning/10 text-text'
+                          : atCap
+                            ? 'cursor-default border-border bg-layer text-helper opacity-50'
+                            : 'cursor-pointer border-border bg-layer text-secondary hover:border-interactive hover:text-text'
+                      }`}
+                    >
+                      <span className="font-medium">{m.label}</span>
+                      <span className="ml-1.5 font-mono text-[10px] text-helper">
+                        {m.provider}
+                      </span>
+                      {m.benchmark && (
+                        <span className="ml-1.5 font-mono text-[10px] text-interactive">
+                          &starf; benchmarked
+                        </span>
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+
+              {offBenchmark.length > 0 && (
+                <p className="mt-2.5 border-l-2 border-support-warning bg-support-warning/5 py-2 pl-3 text-[12.5px] leading-relaxed text-text">
+                  <strong>
+                    Every benchmark figure on this site was measured on{' '}
+                    {byId[benchId]?.label || shortModel(benchId)}.
+                  </strong>{' '}
+                  {offBenchmark.length === 1 ? 'The other model you have picked has' : 'The other models you have picked have'}{' '}
+                  not been benchmarked — answers are scored against the same ground truth, but a
+                  single run is not a measurement. Retrieval is identical across models; only the
+                  model writing the SQL, the Cypher and the prose changes.
+                </p>
+              )}
+            </div>
+          )}
         </form>
       </Section>
 
       <Section>
-        <div className="grid gap-4 lg:grid-cols-3">
-          {MODES.filter((m) => selected.has(m)).map((m) => (
-            <Pane key={m} mode={m} state={panes[m]} />
-          ))}
+        <div
+          className={`grid gap-4 ${
+            (chosen.length || 1) > 1 ? 'lg:grid-cols-2 xl:grid-cols-3' : 'lg:grid-cols-3'
+          }`}
+        >
+          {MODES.filter((m) => selected.has(m)).flatMap((m) =>
+            (chosen.length ? chosen : [benchId]).map((id) => (
+              <Pane
+                key={paneKey({ mode: m, model: id })}
+                mode={m}
+                model={id}
+                modelLabel={byId[id]?.label}
+                isBenchmark={id === benchId}
+                showModel={(chosen.length || 1) > 1 || id !== benchId}
+                state={panes[paneKey({ mode: m, model: id })]}
+              />
+            )),
+          )}
         </div>
       </Section>
     </>
