@@ -1,12 +1,21 @@
 import { Link } from 'react-router-dom'
 import { Card, PageHead, Section } from '../components/Shell'
-import { CompareMatrix, Legend } from '../components/CompareMatrix'
+import { Attempts, CompareMatrix } from '../components/CompareMatrix'
 import { Pipeline } from '../components/Pipeline'
 import { Walkthrough } from '../components/Walkthrough'
 import { MODE_META, MODES, fmt } from '../api'
 import data from '../data/benchmark.json'
 
 const c = data.corpus
+
+/* The strict measure: a question counts only if all three attempts passed.
+   Right-once-out-of-three is not a capability you can ship. */
+const QUESTIONS_SOLID = Object.fromEntries(
+  MODES.map((m) => [
+    m,
+    data.questions.filter((q) => q.runs[m].trialStatuses.every((s) => s === 'pass')).length,
+  ]),
+)
 
 function Stat({ value, label }) {
  return (
@@ -45,12 +54,12 @@ export default function Home() {
  return (
     <>
       <PageHead
- eyebrow={`SEC EDGAR · ${fmt(c.postgres.filings)} filings · 180 scored runs`}
+ eyebrow={`SEC EDGAR · ${fmt(c.postgres.filings)} filings · 20 questions · 180 attempts`}
  title="Three ways to ask a filing a question"
       >
         <p>
           Twelve months of SEC disclosure loaded into Postgres and Neo4j, then queried three
- ways by the same model — twenty questions, three trials each. The finding is not that
+ ways by the same model — twenty questions, each asked three times. The finding is not that
  SQL cannot join. It is that{' '}
           <em className="text-text not-italic">identity</em> and{' '}
           <em className="text-text not-italic">provenance</em> are structure you either
@@ -60,16 +69,16 @@ export default function Home() {
 
       <Section>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <Stat value={`${data.totals.graphrag.passes}/60`} label="GraphRAG passes"/>
-          <Stat value={`${data.totals.text_to_sql.passes}/60`} label="text-to-SQL passes"/>
-          <Stat value={`${data.totals.vector_rag.passes}/60`} label="Vector RAG passes"/>
-          <Stat value={data.totals.text_to_sql.halluc} label="Confident falsehoods from SQL"/>
+          <Stat value={`${QUESTIONS_SOLID.graphrag}/20`} label="Questions GraphRAG got right 3 times out of 3"/>
+          <Stat value={`${QUESTIONS_SOLID.text_to_sql}/20`} label="Questions text-to-SQL got right 3 times out of 3"/>
+          <Stat value={`${QUESTIONS_SOLID.vector_rag}/20`} label="Questions Vector RAG got right 3 times out of 3"/>
+          <Stat value={data.totals.text_to_sql.halluc} label="Confident falsehoods from SQL, in 60 attempts"/>
         </div>
       </Section>
 
-      <Section label="Quick compare" note="rows are question types · 5 questions × 3 trials each">
+      <Section label="Quick compare" note="rows are question types · 5 questions, each asked 3 times">
         <CompareMatrix />
-        <Legend />
+        <Attempts />
         <p className="mt-5 text-[13.5px] leading-relaxed text-secondary">
           Scoring is programmatic against hand-verified ground truth — required entities,
  forbidden entities, and citation precision/recall. No LLM judge.{' '}

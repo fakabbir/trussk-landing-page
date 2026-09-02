@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Card, Dot, PageHead, Pill, Section } from '../components/Shell'
-import { CompareMatrix, Legend } from '../components/CompareMatrix'
+import { Attempts, CompareMatrix, Legend } from '../components/CompareMatrix'
 import { MODE_META, MODES, STATUS_LABEL, fmt } from '../api'
 import data from '../data/benchmark.json'
 import stats from '../data/stats.json'
@@ -49,7 +49,7 @@ function Answer({ text, forbidden }) {
   )
 }
 
-/* Every one of the 180 runs, unaggregated. Three dots per cell = three trials.
+/* Every one of the 180 attempts, unaggregated. Three dots per cell = the three attempts.
    Included because the type-level rates hide which individual questions broke. */
 function OutcomeGrid({ onPick }) {
   return (
@@ -141,7 +141,7 @@ function CaseStudy({ q }) {
                   <Pill status={s.status}>{STATUS_LABEL[s.status]}</Pill>
                 </div>
                 <p className="mt-1 font-mono text-[10px] text-secondary">
-                  {q.runs[m].passes}/3 trials passed
+                  {q.runs[m].passes}/3 attempts passed
                 </p>
               </div>
 
@@ -241,23 +241,25 @@ export default function Benchmarks() {
     <>
       <PageHead eyebrow="Methodology · dataset · case studies" title="How the comparison was run">
         <p>
-          Three retrieval architectures, twenty questions in four categories, three trials each —{' '}
-          <strong className="text-text">180 scored runs</strong> against hand-verified ground truth.
+          Three retrieval architectures and twenty questions in four categories. Every question was
+          asked three times of every architecture — <strong className="text-text">180 scored
+          attempts</strong> against hand-verified ground truth, with all three attempts counting
+          rather than the best of them.
           Two of the four categories were chosen specifically because the graph should{' '}
           <em>not</em> win them. Everything below is measured from the loaded databases, including
           the parts that go against the thesis.
         </p>
       </PageHead>
 
-      <Section label="Results" note="60 runs per architecture">
+      <Section label="Results" note="20 questions, each asked 3 times">
         <CompareMatrix />
-        <Legend />
+        <Attempts />
 
         <div className="mt-6 overflow-x-auto border border-border bg-bg">
           <table className="w-full min-w-[620px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-border bg-layer text-left font-mono text-[10px] uppercase tracking-[0.14em] text-secondary">
-                <th className="px-5 py-3 font-medium">Across all 60 runs</th>
+                <th className="px-5 py-3 font-medium">Across all 60 attempts</th>
                 {MODES.map((m) => (
                   <th key={m} className="px-5 py-3 font-medium text-text">
                     {MODE_META[m].label}
@@ -277,7 +279,7 @@ export default function Benchmarks() {
                 ['honest refusals', (t) => t.refused, null],
                 ['avg evidence chars', (t) => fmt(t.evidence), null],
                 ['avg latency', (t) => `${t.latency}s`, null],
-                ['tokens, 60 runs', (t) => fmt(t.tokens), null],
+                ['tokens, 60 attempts', (t) => fmt(t.tokens), null],
               ].map(([label, get, cls]) => (
                 <tr key={label} className="border-b border-border last:border-0">
                   <th scope="row" className="px-5 py-2.5 text-left font-normal text-secondary">
@@ -296,22 +298,22 @@ export default function Benchmarks() {
 
         <p className="mt-4 font-mono text-[10.5px] leading-relaxed text-helper">
           {fmt(data.usage.calls)} LLM calls, {fmt(data.usage.total_tokens)} tokens total across the
-          whole run. GraphRAG is {(data.totals.graphrag.tokens / data.totals.vector_rag.tokens).toFixed(1)}
+          whole benchmark. GraphRAG is {(data.totals.graphrag.tokens / data.totals.vector_rag.tokens).toFixed(1)}
           × the tokens of Vector RAG and{' '}
           {(data.totals.graphrag.tokens / data.totals.text_to_sql.tokens).toFixed(1)}× text-to-SQL —
           the accuracy is bought, not free.
         </p>
       </Section>
 
-      <Section label="Every run" note="click a row to open its case study">
+      <Section label="Every attempt" note="click a row to open its case study">
         <OutcomeGrid onPick={setOpenId} />
         <Legend />
         <p className="mt-4 max-w-3xl text-[13.5px] leading-relaxed text-secondary">
           The rows worth arguing with are <strong className="text-text">T2-1, T2-3, T2-4</strong>{' '}
           (GraphRAG loses to plain SQL), <strong className="text-text">T4-2</strong> (GraphRAG scores
           zero on a question designed for it), and <strong className="text-text">T1-1</strong> through{' '}
-          <strong className="text-text">T1-5</strong>, where Vector RAG — the expected winner — passes
-          three runs out of fifteen. Each is explained at the bottom of this page.
+          <strong className="text-text">T1-5</strong>, where Vector RAG — the expected winner — got
+          one question of five. Each is explained at the bottom of this page.
         </p>
       </Section>
 
