@@ -119,7 +119,7 @@ export function Attempts() {
       three attempts passed; the ones marked{' '}
       <span className="text-support-warning">passed only some attempts</span> got the right answer
       unreliably, which in production is closer to wrong than to right. It matters:{' '}
-      <strong className="text-text">12 of 60</strong> question/architecture pairs returned
+      <strong className="text-text">10 of 60</strong> question/architecture pairs returned
       different outcomes across their three attempts, and one of them — text-to-SQL on the
       Monica Lozano query — hallucinated, failed, then honestly refused. A single attempt each
       would have let that finding come down to luck.

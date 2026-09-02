@@ -4,13 +4,6 @@
   "vector_rag",
   "graphrag"
  ],
- "usage": {
-  "calls": 341,
-  "prompt_tokens": 995657,
-  "completion_tokens": 61864,
-  "reasoning_tokens": 0,
-  "total_tokens": 1057521
- },
  "types": [
   {
    "id": "T1",
@@ -22,14 +15,14 @@
      "total": 15,
      "halluc": 0,
      "uncited": 14,
-     "refused": 9
+     "refused": 1
     },
     "vector_rag": {
      "passes": 3,
      "total": 15,
      "halluc": 0,
      "uncited": 6,
-     "refused": 12
+     "refused": 6
     },
     "graphrag": {
      "passes": 15,
@@ -78,7 +71,7 @@
      "total": 15,
      "halluc": 2,
      "uncited": 2,
-     "refused": 11
+     "refused": 10
     },
     "vector_rag": {
      "passes": 0,
@@ -102,25 +95,25 @@
    "expect": "GraphRAG",
    "runs": {
     "text_to_sql": {
-     "passes": 13,
+     "passes": 14,
      "total": 15,
      "halluc": 0,
      "uncited": 0,
      "refused": 1
     },
     "vector_rag": {
-     "passes": 3,
+     "passes": 6,
      "total": 15,
      "halluc": 0,
      "uncited": 0,
-     "refused": 12
+     "refused": 9
     },
     "graphrag": {
-     "passes": 8,
+     "passes": 9,
      "total": 15,
      "halluc": 0,
      "uncited": 0,
-     "refused": 7
+     "refused": 6
     }
    }
   }
@@ -130,8 +123,8 @@
    "id": "T1-1",
    "type": "T1",
    "kind": "single-document semantic",
-   "question": "What manufacturing and supply chain risks did Moderna, Inc. disclose in the risk factors of its 10-K?",
    "expect": "vector RAG or GraphRAG",
+   "question": "What manufacturing and supply chain risks did Moderna, Inc. disclose in the risk factors of its 10-K?",
    "validAccessions": [
     "0001682852-26-000033"
    ],
@@ -156,10 +149,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1839,
-      "latency": 4.16,
-      "calls": 2,
       "evidence": 759,
+      "tokens": 1839,
+      "calls": 2,
+      "latency": 4.16,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Moderna"
@@ -187,61 +180,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001101302-26-000012",
-        "item": "1A",
+        "sim": 0.6696,
         "company": "ENTEGRIS INC",
-        "sim": 0.6696
+        "item": "1A"
        },
        {
-        "accession": "0001834622-26-000008",
-        "item": "1A",
+        "sim": 0.6382,
         "company": "Hayward Holdings, Inc.",
-        "sim": 0.6382
+        "item": "1A"
        },
        {
-        "accession": "0001002638-26-000068",
-        "item": "1A",
+        "sim": 0.628,
         "company": "OPEN TEXT CORP",
-        "sim": 0.628
+        "item": "1A"
        },
        {
-        "accession": "0000879407-25-000029",
-        "item": "1A",
+        "sim": 0.6253,
         "company": "ARROWHEAD PHARMACEUTICALS, INC.",
-        "sim": 0.6253
+        "item": "1A"
        },
        {
-        "accession": "0001045810-26-000021",
-        "item": "1A",
+        "sim": 0.6228,
         "company": "NVIDIA CORP",
-        "sim": 0.6228
+        "item": "1A"
        },
        {
-        "accession": "0001334036-26-000006",
-        "item": "1A",
+        "sim": 0.6203,
         "company": "Crocs, Inc.",
-        "sim": 0.6203
+        "item": "1A"
        },
        {
-        "accession": "0001743725-26-000007",
-        "item": "1A",
+        "sim": 0.616,
         "company": "GRID DYNAMICS HOLDINGS, INC.",
-        "sim": 0.616
+        "item": "1A"
        },
        {
-        "accession": "0001743881-26-000009",
-        "item": "1A",
+        "sim": 0.6144,
         "company": "BridgeBio Pharma, Inc.",
-        "sim": 0.6144
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1972,
-      "latency": 5.23,
-      "calls": 1,
       "evidence": 8938,
+      "tokens": 1972,
+      "calls": 1,
+      "latency": 5.23,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Moderna"
@@ -285,10 +270,10 @@
        "supplier",
        "production"
       ],
-      "tokens": 3411,
-      "latency": 4.59,
-      "calls": 3,
       "evidence": 2960,
+      "tokens": 3411,
+      "calls": 3,
+      "latency": 4.59,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Moderna"
@@ -311,8 +296,8 @@
    "id": "T1-2",
    "type": "T1",
    "kind": "single-document semantic",
-   "question": "What supply chain and food safety risks did Yum China Holdings, Inc. disclose in the risk factors of its 10-K?",
    "expect": "vector RAG or GraphRAG",
+   "question": "What supply chain and food safety risks did Yum China Holdings, Inc. disclose in the risk factors of its 10-K?",
    "validAccessions": [
     "0001193125-26-082824"
    ],
@@ -337,10 +322,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1762,
-      "latency": 3.16,
-      "calls": 2,
       "evidence": 736,
+      "tokens": 1762,
+      "calls": 2,
+      "latency": 3.16,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Yum China"
@@ -368,61 +353,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001041061-26-000084",
-        "item": "1A",
+        "sim": 0.7057,
         "company": "YUM BRANDS INC",
-        "sim": 0.7057
+        "item": "1A"
        },
        {
-        "accession": "0001041061-26-000084",
-        "item": "1A",
+        "sim": 0.6547,
         "company": "YUM BRANDS INC",
-        "sim": 0.6547
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-024682",
-        "item": "1A",
+        "sim": 0.6382,
         "company": "FGI Industries Ltd.",
-        "sim": 0.6382
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-082824",
-        "item": "1A",
+        "sim": 0.6269,
         "company": "Yum China Holdings, Inc.",
-        "sim": 0.6269
+        "item": "1A"
        },
        {
-        "accession": "0001437749-26-006113",
-        "item": "1A",
+        "sim": 0.6115,
         "company": "MONOLITHIC POWER SYSTEMS INC",
-        "sim": 0.6115
+        "item": "1A"
        },
        {
-        "accession": "0001437749-26-008214",
-        "item": "1A",
+        "sim": 0.6099,
         "company": "NATIONAL PRESTO INDUSTRIES INC",
-        "sim": 0.6099
+        "item": "1A"
        },
        {
-        "accession": "0001865107-26-000008",
-        "item": "1A",
+        "sim": 0.6042,
         "company": "A.K.A. BRANDS HOLDING CORP.",
-        "sim": 0.6042
+        "item": "1A"
        },
        {
-        "accession": "0001101302-26-000012",
-        "item": "1A",
+        "sim": 0.6032,
         "company": "ENTEGRIS INC",
-        "sim": 0.6032
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2165,
-      "latency": 2.29,
-      "calls": 1,
       "evidence": 8969,
+      "tokens": 2165,
+      "calls": 1,
+      "latency": 2.29,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Yum China"
@@ -471,10 +448,10 @@
        "supplier",
        "foodborne"
       ],
-      "tokens": 2450,
-      "latency": 4.28,
-      "calls": 2,
       "evidence": 3013,
+      "tokens": 2450,
+      "calls": 2,
+      "latency": 4.28,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Yum China"
@@ -497,8 +474,8 @@
    "id": "T1-3",
    "type": "T1",
    "kind": "single-document semantic",
-   "question": "What cybersecurity and data privacy risks did ROKU, INC disclose in the risk factors of its 10-K?",
    "expect": "vector RAG or GraphRAG",
+   "question": "What cybersecurity and data privacy risks did ROKU, INC disclose in the risk factors of its 10-K?",
    "validAccessions": [
     "0001628280-26-008114"
    ],
@@ -523,10 +500,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1791,
-      "latency": 3.54,
-      "calls": 2,
       "evidence": 752,
+      "tokens": 1791,
+      "calls": 2,
+      "latency": 3.54,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Roku"
@@ -554,61 +531,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001039828-26-000004",
-        "item": "1A",
+        "sim": 0.6024,
         "company": "American National Group Inc.",
-        "sim": 0.6024
+        "item": "1A"
        },
        {
-        "accession": "0001869453-26-000017",
-        "item": "1A",
+        "sim": 0.5855,
         "company": "Blue Owl Technology Income Corp.",
-        "sim": 0.5855
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-015820",
-        "item": "1A",
+        "sim": 0.5732,
         "company": "SCI Engineered Materials, Inc.",
-        "sim": 0.5732
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-027199",
-        "item": "1A",
+        "sim": 0.572,
         "company": "Jefferson Capital, Inc. / DE",
-        "sim": 0.572
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-020206",
-        "item": "1A",
+        "sim": 0.571,
         "company": "HPS Corporate Lending Fund",
-        "sim": 0.571
+        "item": "1A"
        },
        {
-        "accession": "0000768899-26-000009",
-        "item": "1A",
+        "sim": 0.5701,
         "company": "TrueBlue, Inc.",
-        "sim": 0.5701
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-085687",
-        "item": "1A",
+        "sim": 0.5638,
         "company": "Commerce.com, Inc.",
-        "sim": 0.5638
+        "item": "1A"
        },
        {
-        "accession": "0001376986-25-000056",
-        "item": "1A",
+        "sim": 0.5636,
         "company": "Tennessee Valley Authority",
-        "sim": 0.5636
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1896,
-      "latency": 2.07,
-      "calls": 1,
       "evidence": 9000,
+      "tokens": 1896,
+      "calls": 1,
+      "latency": 2.07,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Roku"
@@ -652,10 +621,10 @@
        "security breach",
        "data protection"
       ],
-      "tokens": 2332,
-      "latency": 3.96,
-      "calls": 2,
       "evidence": 3000,
+      "tokens": 2332,
+      "calls": 2,
+      "latency": 3.96,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Roku"
@@ -678,8 +647,8 @@
    "id": "T1-4",
    "type": "T1",
    "kind": "single-document semantic",
-   "question": "What cybersecurity and competition risks did SentinelOne, Inc. disclose in the risk factors of its 10-K?",
    "expect": "vector RAG or GraphRAG",
+   "question": "What cybersecurity and competition risks did SentinelOne, Inc. disclose in the risk factors of its 10-K?",
    "validAccessions": [
     "0001583708-26-000020"
    ],
@@ -704,10 +673,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1736,
-      "latency": 3.42,
-      "calls": 2,
       "evidence": 740,
+      "tokens": 1736,
+      "calls": 2,
+      "latency": 3.42,
       "entityRecall": 1.0,
       "entitiesFound": [
        "SentinelOne"
@@ -735,61 +704,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.6591,
         "company": "SUN",
-        "sim": 0.6591
+        "item": "1A"
        },
        {
-        "accession": "0001169561-26-000017",
-        "item": "1A",
+        "sim": 0.6025,
         "company": "COMMVAULT SYSTEMS INC",
-        "sim": 0.6025
+        "item": "1A"
        },
        {
-        "accession": "0000315213-26-000006",
-        "item": "1A",
+        "sim": 0.601,
         "company": "ROBERT HALF INC.",
-        "sim": 0.601
+        "item": "1A"
        },
        {
-        "accession": "0000720005-25-000093",
-        "item": "1A",
+        "sim": 0.5991,
         "company": "RAYMOND JAMES FINANCIAL INC",
-        "sim": 0.5991
+        "item": "1A"
        },
        {
-        "accession": "0001654954-26-003625",
-        "item": "1A",
+        "sim": 0.5811,
         "company": "DATA I/O CORP",
-        "sim": 0.5811
+        "item": "1A"
        },
        {
-        "accession": "0000320121-26-000010",
-        "item": "1A",
+        "sim": 0.5787,
         "company": "TELOS CORP",
-        "sim": 0.5787
+        "item": "1A"
        },
        {
-        "accession": "0001014473-26-000006",
-        "item": "1A",
+        "sim": 0.5786,
         "company": "VERISIGN INC/CA",
-        "sim": 0.5786
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-010413",
-        "item": "1A",
+        "sim": 0.5786,
         "company": "ABEONA THERAPEUTICS INC.",
-        "sim": 0.5786
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1912,
-      "latency": 1.7,
-      "calls": 1,
       "evidence": 8926,
+      "tokens": 1912,
+      "calls": 1,
+      "latency": 1.7,
       "entityRecall": 1.0,
       "entitiesFound": [
        "SentinelOne"
@@ -831,10 +792,10 @@
        "cybersecurity",
        "competition"
       ],
-      "tokens": 2410,
-      "latency": 4.29,
-      "calls": 2,
       "evidence": 3009,
+      "tokens": 2410,
+      "calls": 2,
+      "latency": 4.29,
       "entityRecall": 1.0,
       "entitiesFound": [
        "SentinelOne"
@@ -857,8 +818,8 @@
    "id": "T1-5",
    "type": "T1",
    "kind": "single-document semantic",
-   "question": "What regulatory and reimbursement risks did Privia Health Group, Inc. disclose in the risk factors of its 10-K?",
    "expect": "vector RAG or GraphRAG",
+   "question": "What regulatory and reimbursement risks did Privia Health Group, Inc. disclose in the risk factors of its 10-K?",
    "validAccessions": [
     "0001759655-26-000010"
    ],
@@ -883,10 +844,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2629,
-      "latency": 3.76,
-      "calls": 3,
       "evidence": 9,
+      "tokens": 2629,
+      "calls": 3,
+      "latency": 3.76,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Privia Health"
@@ -914,61 +875,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001398733-26-000018",
-        "item": "1A",
+        "sim": 0.5966,
         "company": "Aquestive Therapeutics, Inc.",
-        "sim": 0.5966
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-101117",
-        "item": "1A",
+        "sim": 0.581,
         "company": "Minerva Neurosciences, Inc.",
-        "sim": 0.581
+        "item": "1A"
        },
        {
-        "accession": "0000875045-26-000013",
-        "item": "1A",
+        "sim": 0.5705,
         "company": "BIOGEN INC.",
-        "sim": 0.5705
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-085818",
-        "item": "1A",
+        "sim": 0.5658,
         "company": "AMARIN CORP PLC\\UK",
-        "sim": 0.5658
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-029580",
-        "item": "1A",
+        "sim": 0.5618,
         "company": "CAPRICOR THERAPEUTICS, INC.",
-        "sim": 0.5618
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-073223",
-        "item": "1A",
+        "sim": 0.5553,
         "company": "Modular Medical, Inc.",
-        "sim": 0.5553
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-011091",
-        "item": "1A",
+        "sim": 0.5536,
         "company": "CORCEPT THERAPEUTICS INC",
-        "sim": 0.5536
+        "item": "1A"
        },
        {
-        "accession": "0000875045-26-000013",
-        "item": "1A",
+        "sim": 0.5478,
         "company": "BIOGEN INC.",
-        "sim": 0.5478
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1942,
-      "latency": 1.73,
-      "calls": 1,
       "evidence": 8970,
+      "tokens": 1942,
+      "calls": 1,
+      "latency": 1.73,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Privia Health"
@@ -1011,10 +964,10 @@
        "reimbursement",
        "risk factors"
       ],
-      "tokens": 2426,
-      "latency": 4.35,
-      "calls": 2,
       "evidence": 3008,
+      "tokens": 2426,
+      "calls": 2,
+      "latency": 4.35,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Privia Health"
@@ -1037,8 +990,8 @@
    "id": "T2-1",
    "type": "T2",
    "kind": "structured aggregation",
-   "question": "Which audit firm appears as the auditor for the most companies in this dataset, and how many distinct companies does it audit?",
    "expect": "text-to-SQL",
+   "question": "Which audit firm appears as the auditor for the most companies in this dataset, and how many distinct companies does it audit?",
    "validAccessions": [],
    "required": [
     "Ernst & Young"
@@ -1061,10 +1014,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1666,
-      "latency": 1.14,
-      "calls": 2,
       "evidence": 1239,
+      "tokens": 1666,
+      "calls": 2,
+      "latency": 1.14,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Ernst & Young"
@@ -1092,61 +1045,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001140361-26-014773",
-        "item": "1A",
+        "sim": 0.5126,
         "company": "Cenntro Inc.",
-        "sim": 0.5126
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-073119",
-        "item": "1A",
+        "sim": 0.5067,
         "company": "QDM International Inc.",
-        "sim": 0.5067
+        "item": "1A"
        },
        {
-        "accession": "0001857816-26-000018",
-        "item": "1A",
+        "sim": 0.5064,
         "company": "GigaCloud Technology Inc",
-        "sim": 0.5064
+        "item": "1A"
        },
        {
-        "accession": "0001929017-26-000008",
-        "item": "1A",
+        "sim": 0.5017,
         "company": "Sealy Industrial Partners IV, LP",
-        "sim": 0.5017
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-082824",
-        "item": "1A",
+        "sim": 0.495,
         "company": "Yum China Holdings, Inc.",
-        "sim": 0.495
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-041108",
-        "item": "1A",
+        "sim": 0.491,
         "company": "Thunder Power Holdings, Inc.",
-        "sim": 0.491
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-033659",
-        "item": "1A",
+        "sim": 0.4899,
         "company": "Commercial Bancgroup, Inc.",
-        "sim": 0.4899
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-034880",
-        "item": "1A",
+        "sim": 0.4885,
         "company": "COGNITION THERAPEUTICS INC",
-        "sim": 0.4885
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2085,
-      "latency": 2.26,
-      "calls": 1,
       "evidence": 8988,
+      "tokens": 2085,
+      "calls": 1,
+      "latency": 2.26,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -2768,10 +2713,10 @@
        "independent registered public accounting firm",
        "principal accountant"
       ],
-      "tokens": 50736,
-      "latency": 6.8,
-      "calls": 3,
       "evidence": 14404,
+      "tokens": 50736,
+      "calls": 3,
+      "latency": 6.8,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -2794,8 +2739,8 @@
    "id": "T2-2",
    "type": "T2",
    "kind": "structured aggregation",
-   "question": "Which company discloses the most subsidiaries in its EX-21 exhibit, and how many does it disclose?",
    "expect": "text-to-SQL",
+   "question": "Which company discloses the most subsidiaries in its EX-21 exhibit, and how many does it disclose?",
    "validAccessions": [],
    "required": [
     "Ventas"
@@ -2818,10 +2763,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1800,
-      "latency": 2.6,
-      "calls": 2,
       "evidence": 1476,
+      "tokens": 1800,
+      "calls": 2,
+      "latency": 2.6,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Ventas"
@@ -2849,61 +2794,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001213900-26-037999",
-        "item": "1A",
+        "sim": 0.5285,
         "company": "Safe & Green Development Corp",
-        "sim": 0.5285
+        "item": "1A"
        },
        {
-        "accession": "0001898795-26-000028",
-        "item": "1A",
+        "sim": 0.4964,
         "company": "LiveWire Group, Inc.",
-        "sim": 0.4964
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-134564",
-        "item": "1A",
+        "sim": 0.4962,
         "company": "GigCapital8 Corp.",
-        "sim": 0.4962
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-134550",
-        "item": "1A",
+        "sim": 0.4948,
         "company": "GigCapital9 Corp.",
-        "sim": 0.4948
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-035675",
-        "item": "1A",
+        "sim": 0.4931,
         "company": "Functional Brands Inc.",
-        "sim": 0.4931
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-017337",
-        "item": "1A",
+        "sim": 0.4888,
         "company": "ON24 INC.",
-        "sim": 0.4888
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-034729",
-        "item": "1A",
+        "sim": 0.4874,
         "company": "Apex Treasury Corp",
-        "sim": 0.4874
+        "item": "1A"
        },
        {
-        "accession": "0001437749-26-010310",
-        "item": "1A",
+        "sim": 0.4867,
         "company": "Allarity Therapeutics, Inc.",
-        "sim": 0.4867
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1921,
-      "latency": 1.02,
-      "calls": 1,
       "evidence": 8275,
+      "tokens": 1921,
+      "calls": 1,
+      "latency": 1.02,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -4515,10 +4452,10 @@
        "exhibit 21",
        "list of subsidiaries"
       ],
-      "tokens": 55387,
-      "latency": 6.87,
-      "calls": 2,
       "evidence": 12869,
+      "tokens": 55387,
+      "calls": 2,
+      "latency": 6.87,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Ventas"
@@ -4537,8 +4474,8 @@
    "id": "T2-3",
    "type": "T2",
    "kind": "structured aggregation",
-   "question": "What is the most common jurisdiction of incorporation among all disclosed subsidiaries, and how many subsidiaries are incorporated there?",
    "expect": "text-to-SQL",
+   "question": "What is the most common jurisdiction of incorporation among all disclosed subsidiaries, and how many subsidiaries are incorporated there?",
    "validAccessions": [],
    "required": [
     "Delaware"
@@ -4561,10 +4498,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1500,
-      "latency": 2.28,
-      "calls": 2,
       "evidence": 893,
+      "tokens": 1500,
+      "calls": 2,
+      "latency": 2.28,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Delaware"
@@ -4592,61 +4529,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001213900-26-036502",
-        "item": "1A",
+        "sim": 0.6012,
         "company": "Pyrophyte Acquisition Corp. II",
-        "sim": 0.6012
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-035615",
-        "item": "1A",
+        "sim": 0.5838,
         "company": "Vine Hill Capital Investment Corp.",
-        "sim": 0.5838
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-032193",
-        "item": "1A",
+        "sim": 0.5793,
         "company": "SilverBox Corp IV",
-        "sim": 0.5793
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-032357",
-        "item": "1A",
+        "sim": 0.5784,
         "company": "Bluerock Acquisition Corp.",
-        "sim": 0.5784
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-029189",
-        "item": "1A",
+        "sim": 0.5758,
         "company": "Meshflow Acquisition Corp",
-        "sim": 0.5758
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-033348",
-        "item": "1A",
+        "sim": 0.5726,
         "company": "SilverBox Corp V",
-        "sim": 0.5726
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-132014",
-        "item": "1A",
+        "sim": 0.572,
         "company": "Sensei Biotherapeutics, Inc.",
-        "sim": 0.572
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-023006",
-        "item": "1A",
+        "sim": 0.5698,
         "company": "Evolution Global Acquisition Corp",
-        "sim": 0.5698
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1926,
-      "latency": 1.69,
-      "calls": 1,
       "evidence": 8998,
+      "tokens": 1926,
+      "calls": 1,
+      "latency": 1.69,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -6265,10 +6194,10 @@
        "subsidiary",
        "incorporated"
       ],
-      "tokens": 56538,
-      "latency": 8.83,
-      "calls": 3,
       "evidence": 12632,
+      "tokens": 56538,
+      "calls": 3,
+      "latency": 8.83,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Delaware"
@@ -6289,8 +6218,8 @@
    "id": "T2-4",
    "type": "T2",
    "kind": "structured aggregation",
-   "question": "Which SEC form type appears most often in this dataset, and how many filings of that type are there?",
    "expect": "text-to-SQL",
+   "question": "Which SEC form type appears most often in this dataset, and how many filings of that type are there?",
    "validAccessions": [],
    "required": [
     "8-K"
@@ -6313,10 +6242,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1490,
-      "latency": 1.79,
-      "calls": 2,
       "evidence": 698,
+      "tokens": 1490,
+      "calls": 2,
+      "latency": 1.79,
       "entityRecall": 1.0,
       "entitiesFound": [
        "8-K"
@@ -6344,61 +6273,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001213900-26-038510",
-        "item": "1A",
+        "sim": 0.5254,
         "company": "Zoned Properties, Inc.",
-        "sim": 0.5254
+        "item": "1A"
        },
        {
-        "accession": "0000899689-26-000009",
-        "item": "1A",
+        "sim": 0.5175,
         "company": "VORNADO REALTY TRUST",
-        "sim": 0.5175
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-064005",
-        "item": "1A",
+        "sim": 0.4762,
         "company": "Oric Pharmaceuticals, Inc.",
-        "sim": 0.4762
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-044040",
-        "item": "1A",
+        "sim": 0.4723,
         "company": "CERO THERAPEUTICS HOLDINGS, INC.",
-        "sim": 0.4723
+        "item": "1A"
        },
        {
-        "accession": "0000811830-26-000005",
-        "item": "1A",
+        "sim": 0.4692,
         "company": "Santander Holdings USA, Inc.",
-        "sim": 0.4692
+        "item": "1A"
        },
        {
-        "accession": "0001178913-26-000953",
-        "item": "1A",
+        "sim": 0.4661,
         "company": "Silexion Therapeutics Corp",
-        "sim": 0.4661
+        "item": "1A"
        },
        {
-        "accession": "0001472375-26-000109",
-        "item": "1A",
+        "sim": 0.4653,
         "company": "Agassi Sports Entertainment Corp.",
-        "sim": 0.4653
+        "item": "1A"
        },
        {
-        "accession": "0001562762-26-000080",
-        "item": "1A",
+        "sim": 0.4645,
         "company": "CAL-MAINE FOODS INC",
-        "sim": 0.4645
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2067,
-      "latency": 1.89,
-      "calls": 1,
       "evidence": 7951,
+      "tokens": 2067,
+      "calls": 1,
+      "latency": 1.89,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8002,10 +7923,10 @@
        "filing type",
        "sec form"
       ],
-      "tokens": 48782,
-      "latency": 6.92,
-      "calls": 3,
       "evidence": 5142,
+      "tokens": 48782,
+      "calls": 3,
+      "latency": 6.92,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8024,8 +7945,8 @@
    "id": "T2-5",
    "type": "T2",
    "kind": "structured aggregation",
-   "question": "Which issuer has the most distinct insiders filing Forms 3, 4 or 5 against it, and how many distinct insiders are there?",
    "expect": "text-to-SQL",
+   "question": "Which issuer has the most distinct insiders filing Forms 3, 4 or 5 against it, and how many distinct insiders are there?",
    "validAccessions": [],
    "required": [
     "Medline"
@@ -8048,10 +7969,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1741,
-      "latency": 2.51,
-      "calls": 2,
       "evidence": 1556,
+      "tokens": 1741,
+      "calls": 2,
+      "latency": 2.51,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Medline"
@@ -8079,61 +8000,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001213900-26-038510",
-        "item": "1A",
+        "sim": 0.493,
         "company": "Zoned Properties, Inc.",
-        "sim": 0.493
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-094012",
-        "item": "1A",
+        "sim": 0.4798,
         "company": "ContextLogic Holdings Inc.",
-        "sim": 0.4798
+        "item": "1A"
        },
        {
-        "accession": "0001835268-26-000013",
-        "item": "1A",
+        "sim": 0.4766,
         "company": "Connect Biopharma Holdings Ltd",
-        "sim": 0.4766
+        "item": "1A"
        },
        {
-        "accession": "0001477932-26-001832",
-        "item": "1A",
+        "sim": 0.4643,
         "company": "VOLITIONRX LTD",
-        "sim": 0.4643
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-115226",
-        "item": "1A",
+        "sim": 0.4636,
         "company": "Mereo BioPharma Group plc",
-        "sim": 0.4636
+        "item": "1A"
        },
        {
-        "accession": "0001062993-26-002973",
-        "item": "1A",
+        "sim": 0.4615,
         "company": "HIVE Digital Technologies Ltd.",
-        "sim": 0.4615
+        "item": "1A"
        },
        {
-        "accession": "0001129928-26-000020",
-        "item": "1A",
+        "sim": 0.4571,
         "company": "ONCOLYTICS BIOTECH INC",
-        "sim": 0.4571
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-086645",
-        "item": "1A",
+        "sim": 0.4569,
         "company": "Amylyx Pharmaceuticals, Inc.",
-        "sim": 0.4569
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1900,
-      "latency": 1.42,
-      "calls": 1,
       "evidence": 7919,
+      "tokens": 1900,
+      "calls": 1,
+      "latency": 1.42,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8177,10 +8090,10 @@
        "form 4",
        "form 5"
       ],
-      "tokens": 2076,
-      "latency": 4.46,
-      "calls": 2,
       "evidence": 1041,
+      "tokens": 2076,
+      "calls": 2,
+      "latency": 4.46,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Medline"
@@ -8201,8 +8114,8 @@
    "id": "T3-1",
    "type": "T3",
    "kind": "multi-hop relational + text",
-   "question": "Brian Wendling holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "expect": "GraphRAG",
+   "question": "Brian Wendling holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "validAccessions": [
     "0001104659-26-010397",
     "0001104659-26-013442",
@@ -8233,10 +8146,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 4965,
-      "latency": 105.05,
-      "calls": 2,
       "evidence": 11599,
+      "tokens": 4965,
+      "calls": 2,
+      "latency": 105.05,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8266,61 +8179,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.5501,
         "company": "SUN",
-        "sim": 0.5501
+        "item": "1A"
        },
        {
-        "accession": "0001193125-25-223165",
-        "item": "1A",
+        "sim": 0.55,
         "company": "SR Bancorp, Inc.",
-        "sim": 0.55
+        "item": "1A"
        },
        {
-        "accession": "0001471265-26-000008",
-        "item": "1A",
+        "sim": 0.5447,
         "company": "Northwest Bancshares, Inc.",
-        "sim": 0.5447
+        "item": "1A"
        },
        {
-        "accession": "0000320121-26-000010",
-        "item": "1A",
+        "sim": 0.5446,
         "company": "TELOS CORP",
-        "sim": 0.5446
+        "item": "1A"
        },
        {
-        "accession": "0001731122-25-001316",
-        "item": "1A",
+        "sim": 0.538,
         "company": "Lunai Bioworks Inc.",
-        "sim": 0.538
+        "item": "1A"
        },
        {
-        "accession": "0000887936-26-000013",
-        "item": "1A",
+        "sim": 0.5356,
         "company": "FTI CONSULTING, INC",
-        "sim": 0.5356
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-115259",
-        "item": "1A",
+        "sim": 0.5342,
         "company": "Antares Strategic Credit Fund II LLC",
-        "sim": 0.5342
+        "item": "1A"
        },
        {
-        "accession": "0001140361-26-011231",
-        "item": "1A",
+        "sim": 0.5316,
         "company": "STRATA Skin Sciences, Inc.",
-        "sim": 0.5316
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2125,
-      "latency": 4.04,
-      "calls": 1,
       "evidence": 8157,
+      "tokens": 2125,
+      "calls": 1,
+      "latency": 4.04,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8405,10 +8310,10 @@
        "data breach",
        "information security"
       ],
-      "tokens": 8273,
-      "latency": 8.05,
-      "calls": 3,
       "evidence": 14388,
+      "tokens": 8273,
+      "calls": 3,
+      "latency": 8.05,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Comscore",
@@ -8441,8 +8346,8 @@
    "id": "T3-2",
    "type": "T3",
    "kind": "multi-hop relational + text",
-   "question": "Monica Lozano holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "expect": "GraphRAG",
+   "question": "Monica Lozano holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "validAccessions": [
     "0000027419-26-000016",
     "0000070858-26-000157",
@@ -8471,10 +8376,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2867,
-      "latency": 5.89,
-      "calls": 2,
       "evidence": 2658,
+      "tokens": 2867,
+      "calls": 2,
+      "latency": 5.89,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Apple",
@@ -8507,61 +8412,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001493152-26-014040",
-        "item": "1A",
+        "sim": 0.5813,
         "company": "BranchOut Food Inc.",
-        "sim": 0.5813
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-120239",
-        "item": "1A",
+        "sim": 0.5808,
         "company": "Cantor Fitzgerald Income Trust, Inc.",
-        "sim": 0.5808
+        "item": "1A"
        },
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.5787,
         "company": "SUN",
-        "sim": 0.5787
+        "item": "1A"
        },
        {
-        "accession": "0001751788-26-000018",
-        "item": "1A",
+        "sim": 0.5696,
         "company": "DOW INC.",
-        "sim": 0.5696
+        "item": "1A"
        },
        {
-        "accession": "0000920522-26-000003",
-        "item": "1A",
+        "sim": 0.5625,
         "company": "ESSEX PROPERTY TRUST, INC.",
-        "sim": 0.5625
+        "item": "1A"
        },
        {
-        "accession": "0000315213-26-000006",
-        "item": "1A",
+        "sim": 0.562,
         "company": "ROBERT HALF INC.",
-        "sim": 0.562
+        "item": "1A"
        },
        {
-        "accession": "0000320121-26-000010",
-        "item": "1A",
+        "sim": 0.5608,
         "company": "TELOS CORP",
-        "sim": 0.5608
+        "item": "1A"
        },
        {
-        "accession": "0001193125-25-213801",
-        "item": "1A",
+        "sim": 0.56,
         "company": "Nutanix, Inc.",
-        "sim": 0.56
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2054,
-      "latency": 1.84,
-      "calls": 1,
       "evidence": 8950,
+      "tokens": 2054,
+      "calls": 1,
+      "latency": 1.84,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8630,10 +8527,10 @@
        "data security",
        "information security"
       ],
-      "tokens": 5418,
-      "latency": 5.14,
-      "calls": 2,
       "evidence": 12220,
+      "tokens": 5418,
+      "calls": 2,
+      "latency": 5.14,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Apple",
@@ -8662,8 +8559,8 @@
    "id": "T3-3",
    "type": "T3",
    "kind": "multi-hop relational + text",
-   "question": "William Giles holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "expect": "GraphRAG",
+   "question": "William Giles holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "validAccessions": [
     "0000016918-26-000011",
     "0000703351-26-000029",
@@ -8692,10 +8589,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 5612,
-      "latency": 9.92,
-      "calls": 3,
       "evidence": 5055,
+      "tokens": 5612,
+      "calls": 3,
+      "latency": 9.92,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Constellation Brands",
@@ -8730,61 +8627,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001575872-26-000245",
-        "item": "1A",
+        "sim": 0.6061,
         "company": "Northann Corp.",
-        "sim": 0.6061
+        "item": "1A"
        },
        {
-        "accession": "0001471265-26-000008",
-        "item": "1A",
+        "sim": 0.6043,
         "company": "Northwest Bancshares, Inc.",
-        "sim": 0.6043
+        "item": "1A"
        },
        {
-        "accession": "0001193125-25-223165",
-        "item": "1A",
+        "sim": 0.6032,
         "company": "SR Bancorp, Inc.",
-        "sim": 0.6032
+        "item": "1A"
        },
        {
-        "accession": "0001253986-26-000019",
-        "item": "1A",
+        "sim": 0.5961,
         "company": "ARBOR REALTY TRUST INC",
-        "sim": 0.5961
+        "item": "1A"
        },
        {
-        "accession": "0002071778-26-000010",
-        "item": "1A",
+        "sim": 0.5952,
         "company": "Fermi Inc.",
-        "sim": 0.5952
+        "item": "1A"
        },
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.594,
         "company": "SUN",
-        "sim": 0.594
+        "item": "1A"
        },
        {
-        "accession": "0000320121-26-000010",
-        "item": "1A",
+        "sim": 0.5932,
         "company": "TELOS CORP",
-        "sim": 0.5932
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-014040",
-        "item": "1A",
+        "sim": 0.5921,
         "company": "BranchOut Food Inc.",
-        "sim": 0.5921
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1876,
-      "latency": 1.04,
-      "calls": 1,
       "evidence": 8934,
+      "tokens": 1876,
+      "calls": 1,
+      "latency": 1.04,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8846,10 +8735,10 @@
        "information security",
        "cyber risk"
       ],
-      "tokens": 5781,
-      "latency": 5.02,
-      "calls": 3,
       "evidence": 9610,
+      "tokens": 5781,
+      "calls": 3,
+      "latency": 5.02,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Constellation Brands",
@@ -8878,8 +8767,8 @@
    "id": "T3-4",
    "type": "T3",
    "kind": "multi-hop relational + text",
-   "question": "Judy Bruner holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "expect": "GraphRAG",
+   "question": "Judy Bruner holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "validAccessions": [
     "0001137789-26-000159",
     "0001628280-25-056742",
@@ -8908,10 +8797,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 7478,
-      "latency": 189.66,
-      "calls": 2,
       "evidence": 22708,
+      "tokens": 7478,
+      "calls": 2,
+      "latency": 189.66,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -8941,61 +8830,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.5682,
         "company": "SUN",
-        "sim": 0.5682
+        "item": "1A"
        },
        {
-        "accession": "0001140361-26-011231",
-        "item": "1A",
+        "sim": 0.5634,
         "company": "STRATA Skin Sciences, Inc.",
-        "sim": 0.5634
+        "item": "1A"
        },
        {
-        "accession": "0001193125-25-223165",
-        "item": "1A",
+        "sim": 0.5508,
         "company": "SR Bancorp, Inc.",
-        "sim": 0.5508
+        "item": "1A"
        },
        {
-        "accession": "0001253986-26-000019",
-        "item": "1A",
+        "sim": 0.5469,
         "company": "ARBOR REALTY TRUST INC",
-        "sim": 0.5469
+        "item": "1A"
        },
        {
-        "accession": "0001471265-26-000008",
-        "item": "1A",
+        "sim": 0.5408,
         "company": "Northwest Bancshares, Inc.",
-        "sim": 0.5408
+        "item": "1A"
        },
        {
-        "accession": "0000320121-26-000010",
-        "item": "1A",
+        "sim": 0.5408,
         "company": "TELOS CORP",
-        "sim": 0.5408
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-014040",
-        "item": "1A",
+        "sim": 0.54,
         "company": "BranchOut Food Inc.",
-        "sim": 0.54
+        "item": "1A"
        },
        {
-        "accession": "0000353184-26-000054",
-        "item": "1A",
+        "sim": 0.5395,
         "company": "AIR T INC",
-        "sim": 0.5395
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1691,
-      "latency": 1.68,
-      "calls": 1,
       "evidence": 7825,
+      "tokens": 1691,
+      "calls": 1,
+      "latency": 1.68,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9057,10 +8938,10 @@
        "data breach",
        "information security"
       ],
-      "tokens": 5689,
-      "latency": 5.37,
-      "calls": 2,
       "evidence": 12310,
+      "tokens": 5689,
+      "calls": 2,
+      "latency": 5.37,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Applied Materials",
@@ -9089,8 +8970,8 @@
    "id": "T3-5",
    "type": "T3",
    "kind": "multi-hop relational + text",
-   "question": "Gregg Sengstack holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "expect": "GraphRAG",
+   "question": "Gregg Sengstack holds an insider role at more than one company in this dataset. For every company where they are an officer or director, list that company's disclosed subsidiaries and summarise the cybersecurity risks that company reported in its 10-K risk factors.",
    "validAccessions": [
     "0000038725-26-000009",
     "0001193125-25-296204",
@@ -9120,10 +9001,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 5151,
-      "latency": 445.52,
-      "calls": 2,
       "evidence": 13738,
+      "tokens": 5151,
+      "calls": 2,
+      "latency": 445.52,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9153,61 +9034,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001471265-26-000008",
-        "item": "1A",
+        "sim": 0.5827,
         "company": "Northwest Bancshares, Inc.",
-        "sim": 0.5827
+        "item": "1A"
        },
        {
-        "accession": "0001140361-26-011231",
-        "item": "1A",
+        "sim": 0.5799,
         "company": "STRATA Skin Sciences, Inc.",
-        "sim": 0.5799
+        "item": "1A"
        },
        {
-        "accession": "0001683168-26-000911",
-        "item": "1A",
+        "sim": 0.576,
         "company": "SUN",
-        "sim": 0.576
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-115259",
-        "item": "1A",
+        "sim": 0.5632,
         "company": "Antares Strategic Credit Fund II LLC",
-        "sim": 0.5632
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-115988",
-        "item": "1A",
+        "sim": 0.5614,
         "company": "Antares Strategic Credit Fund",
-        "sim": 0.5614
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-027163",
-        "item": "1A",
+        "sim": 0.5544,
         "company": "Vuzix Corp",
-        "sim": 0.5544
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-007044",
-        "item": "1A",
+        "sim": 0.5511,
         "company": "NUTRA PHARMA CORP",
-        "sim": 0.5511
+        "item": "1A"
        },
        {
-        "accession": "0001193125-25-223165",
-        "item": "1A",
+        "sim": 0.5507,
         "company": "SR Bancorp, Inc.",
-        "sim": 0.5507
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1852,
-      "latency": 2.6,
-      "calls": 1,
       "evidence": 7854,
+      "tokens": 1852,
+      "calls": 1,
+      "latency": 2.6,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9284,10 +9157,10 @@
        "data breach",
        "information security"
       ],
-      "tokens": 6098,
-      "latency": 7.69,
-      "calls": 2,
       "evidence": 13428,
+      "tokens": 6098,
+      "calls": 2,
+      "latency": 7.69,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Allegion",
@@ -9318,8 +9191,8 @@
    "id": "T4-1",
    "type": "T4",
    "kind": "cross-document entity resolution",
-   "question": "Is \"American Airlines, Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "expect": "GraphRAG",
+   "question": "Is \"American Airlines, Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "validAccessions": [],
    "required": [
     "American Airlines Group"
@@ -9342,10 +9215,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1559,
-      "latency": 6.38,
-      "calls": 2,
       "evidence": 396,
+      "tokens": 1559,
+      "calls": 2,
+      "latency": 6.38,
       "entityRecall": 1.0,
       "entitiesFound": [
        "American Airlines Group"
@@ -9373,61 +9246,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001493152-26-021866",
-        "item": "1A",
+        "sim": 0.5152,
         "company": "Wenyuan Group Corp.",
-        "sim": 0.5152
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-033077",
-        "item": "1A",
+        "sim": 0.5031,
         "company": "Theravance Biopharma, Inc.",
-        "sim": 0.5031
+        "item": "1A"
        },
        {
-        "accession": "0001704292-26-000015",
-        "item": "1A",
+        "sim": 0.499,
         "company": "Zai Lab Ltd",
-        "sim": 0.499
+        "item": "1A"
        },
        {
-        "accession": "0001652535-26-000012",
-        "item": "1A",
+        "sim": 0.4974,
         "company": "ICHOR HOLDINGS, LTD.",
-        "sim": 0.4974
+        "item": "1A"
        },
        {
-        "accession": "0001129928-26-000020",
-        "item": "1A",
+        "sim": 0.4923,
         "company": "ONCOLYTICS BIOTECH INC",
-        "sim": 0.4923
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-018174",
-        "item": "1A",
+        "sim": 0.488,
         "company": "Ardent Health, Inc.",
-        "sim": 0.488
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-035630",
-        "item": "1A",
+        "sim": 0.4806,
         "company": "GD Culture Group Ltd",
-        "sim": 0.4806
+        "item": "1A"
        },
        {
-        "accession": "0001062993-26-002973",
-        "item": "1A",
+        "sim": 0.4786,
         "company": "HIVE Digital Technologies Ltd.",
-        "sim": 0.4786
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2039,
-      "latency": 2.67,
-      "calls": 1,
       "evidence": 8314,
+      "tokens": 2039,
+      "calls": 1,
+      "latency": 2.67,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9476,10 +9341,10 @@
        "american airlines",
        "ex-21"
       ],
-      "tokens": 3976,
-      "latency": 8.76,
-      "calls": 3,
       "evidence": 2102,
+      "tokens": 3976,
+      "calls": 3,
+      "latency": 8.76,
       "entityRecall": 1.0,
       "entitiesFound": [
        "American Airlines Group"
@@ -9500,8 +9365,8 @@
    "id": "T4-2",
    "type": "T4",
    "kind": "cross-document entity resolution",
-   "question": "Is \"AEP Texas Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "expect": "GraphRAG",
+   "question": "Is \"AEP Texas Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "validAccessions": [],
    "required": [
     "American Electric Power"
@@ -9524,10 +9389,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1796,
-      "latency": 3.24,
-      "calls": 2,
       "evidence": 827,
+      "tokens": 1796,
+      "calls": 2,
+      "latency": 3.24,
       "entityRecall": 1.0,
       "entitiesFound": [
        "American Electric Power"
@@ -9557,61 +9422,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001193125-26-108556",
-        "item": "1A",
+        "sim": 0.4721,
         "company": "First Eagle Private Credit Fund",
-        "sim": 0.4721
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-021866",
-        "item": "1A",
+        "sim": 0.463,
         "company": "Wenyuan Group Corp.",
-        "sim": 0.463
+        "item": "1A"
        },
        {
-        "accession": "0001213900-25-097465",
-        "item": "1A",
+        "sim": 0.4604,
         "company": "Advanced Biomed Inc.",
-        "sim": 0.4604
+        "item": "1A"
        },
        {
-        "accession": "0001731122-26-000317",
-        "item": "1A",
+        "sim": 0.4594,
         "company": "Twin Vee PowerCats, Co.",
-        "sim": 0.4594
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-104114",
-        "item": "1A",
+        "sim": 0.4583,
         "company": "CoastalSouth Bancshares, Inc.",
-        "sim": 0.4583
+        "item": "1A"
        },
        {
-        "accession": "0001477932-26-001832",
-        "item": "1A",
+        "sim": 0.4569,
         "company": "VOLITIONRX LTD",
-        "sim": 0.4569
+        "item": "1A"
        },
        {
-        "accession": "0001638826-26-000028",
-        "item": "1A",
+        "sim": 0.4544,
         "company": "ServiceTitan, Inc.",
-        "sim": 0.4544
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-035630",
-        "item": "1A",
+        "sim": 0.4529,
         "company": "GD Culture Group Ltd",
-        "sim": 0.4529
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2097,
-      "latency": 1.24,
-      "calls": 1,
       "evidence": 8707,
+      "tokens": 2097,
+      "calls": 1,
+      "latency": 1.24,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9645,10 +9502,10 @@
        "aep texas",
        "ex-21"
       ],
-      "tokens": 2865,
-      "latency": 5.4,
-      "calls": 3,
       "evidence": 9,
+      "tokens": 2865,
+      "calls": 3,
+      "latency": 5.4,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9667,8 +9524,8 @@
    "id": "T4-3",
    "type": "T4",
    "kind": "cross-document entity resolution",
-   "question": "Is \"Athene Holding Ltd.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "expect": "GraphRAG",
+   "question": "Is \"Athene Holding Ltd.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "validAccessions": [],
    "required": [
     "Apollo Global Management"
@@ -9691,10 +9548,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1557,
-      "latency": 2.36,
-      "calls": 2,
       "evidence": 148,
+      "tokens": 1557,
+      "calls": 2,
+      "latency": 2.36,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Apollo Global Management"
@@ -9724,61 +9581,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001829126-25-007322",
-        "item": "1A",
+        "sim": 0.5486,
         "company": "UBUYHOLDINGS INC",
-        "sim": 0.5486
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-093475",
-        "item": "1A",
+        "sim": 0.5348,
         "company": "5C Lending Partners Corp.",
-        "sim": 0.5348
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-005092",
-        "item": "1A",
+        "sim": 0.5308,
         "company": "KKR Real Estate Finance Trust Inc.",
-        "sim": 0.5308
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-017085",
-        "item": "1A",
+        "sim": 0.5219,
         "company": "Select Water Solutions, Inc.",
-        "sim": 0.5219
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-070875",
-        "item": "1A",
+        "sim": 0.5218,
         "company": "US NUCLEAR CORP.",
-        "sim": 0.5218
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-026775",
-        "item": "1A",
+        "sim": 0.5175,
         "company": "INVO Fertility, Inc.",
-        "sim": 0.5175
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-016900",
-        "item": "1A",
+        "sim": 0.5166,
         "company": "SENTIENT BRANDS HOLDINGS INC.",
-        "sim": 0.5166
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-003967",
-        "item": "1A",
+        "sim": 0.5156,
         "company": "Crisp Momentum Inc.",
-        "sim": 0.5156
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2212,
-      "latency": 1.41,
-      "calls": 1,
       "evidence": 8983,
+      "tokens": 2212,
+      "calls": 1,
+      "latency": 1.41,
       "entityRecall": 0.0,
       "entitiesFound": [],
       "entitiesMissing": [
@@ -9821,10 +9670,10 @@
        "athene holding",
        "ex-21"
       ],
-      "tokens": 3693,
-      "latency": 4.94,
-      "calls": 3,
       "evidence": 3090,
+      "tokens": 3693,
+      "calls": 3,
+      "latency": 4.94,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Apollo Global Management"
@@ -9845,8 +9694,8 @@
    "id": "T4-4",
    "type": "T4",
    "kind": "cross-document entity resolution",
-   "question": "Is \"Alexander's, Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "expect": "GraphRAG",
+   "question": "Is \"Alexander's, Inc.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "validAccessions": [],
    "required": [
     "Vornado Realty Trust"
@@ -9860,24 +9709,24 @@
       "pass"
      ],
      "sample": {
-      "status": "refused",
-      "answer": "Based on the query result, there are no rows returned. This means the database does not contain evidence that \"Alexander's, Inc.\" is listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right. The specific data needed\u2014a parent company listing it as a subsidiary and confirmation of separate filing\u2014is missing from the available rows.",
-      "query": "WITH parent AS (\n  SELECT DISTINCT s.parent_cik, c.name AS parent_name\n  FROM subsidiary s\n  JOIN company c ON c.cik = s.parent_cik\n  WHERE s.subsidiary_name ILIKE '%alexander''s%'\n),\nfiler AS (\n  SELECT cik, name\n  FROM company\n  WHERE name ILIKE '%alexander''s%'\n)\nSELECT \n  p.parent_name,\n  f.name AS subsidiary_filer_name,\n  f.cik AS subsidiary_filer_cik,\n  EXISTS (\n    SELECT 1 FROM filing fl \n    WHERE fl.company_cik = f.cik \n      AND fl.form_type IN ('10-K','10-Q','8-K')\n  ) AS files_separately\nFROM parent p\nCROSS JOIN filer f\nWHERE p.parent_name IS NOT NULL\n  AND f.name IS NOT NULL\nLIMIT 50",
+      "status": "pass",
+      "answer": "Yes. \"Alexander's, Inc.\" (CIK 3499) is listed as a subsidiary in EX-21 exhibits of multiple parents, including **Vornado Realty Trust**, **AvalonBay Communities Inc.**, and **Prudential Financial Inc.** (among others). It also files separately as an SEC filer (files_separately = True).",
+      "query": "WITH parent AS (\n  SELECT DISTINCT s.parent_cik, c.name AS parent_name\n  FROM subsidiary s\n  JOIN company c ON c.cik = s.parent_cik\n  WHERE s.subsidiary_name ILIKE '%alexander%'\n),\nfiler AS (\n  SELECT cik, name\n  FROM company\n  WHERE name ILIKE '%alexander%'\n    AND name ILIKE '%inc%'\n)\nSELECT \n  p.parent_name,\n  f.name AS subsidiary_filer_name,\n  f.cik AS subsidiary_filer_cik,\n  EXISTS (\n    SELECT 1 FROM filing fl \n    WHERE fl.company_cik = f.cik \n      AND fl.form_type IN ('10-K','10-Q','8-K')\n  ) AS files_separately\nFROM parent p\nJOIN filer f ON TRUE\nLIMIT 50",
       "queryLang": "sql",
-      "rows": 0,
+      "rows": 30,
       "retrieved": [],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 3241,
-      "latency": 5.52,
+      "evidence": 1953,
+      "tokens": 3591,
       "calls": 3,
-      "evidence": 9,
-      "entityRecall": 0.0,
-      "entitiesFound": [],
-      "entitiesMissing": [
+      "latency": 4.91,
+      "entityRecall": 1.0,
+      "entitiesFound": [
        "Vornado Realty Trust"
       ],
+      "entitiesMissing": [],
       "forbidden": [],
       "cited": [],
       "correctCites": [],
@@ -9900,61 +9749,53 @@
       "rows": null,
       "retrieved": [
        {
-        "accession": "0000899689-26-000009",
-        "item": "1A",
+        "sim": 0.5372,
         "company": "VORNADO REALTY TRUST",
-        "sim": 0.5372
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-021509",
-        "item": "1A",
+        "sim": 0.4841,
         "company": "United States 12 Month Oil Fund, LP",
-        "sim": 0.4841
+        "item": "1A"
        },
        {
-        "accession": "0000003499-26-000005",
-        "item": "1A",
+        "sim": 0.4751,
         "company": "ALEXANDERS INC",
-        "sim": 0.4751
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-038446",
-        "item": "1A",
+        "sim": 0.4741,
         "company": "StepStone Group Inc.",
-        "sim": 0.4741
+        "item": "1A"
        },
        {
-        "accession": "0001493152-26-014157",
-        "item": "1A",
+        "sim": 0.4736,
         "company": "Clearthink 1 Acquisition Corp.",
-        "sim": 0.4736
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-023411",
-        "item": "1A",
+        "sim": 0.4735,
         "company": "United States 12 Month Natural Gas Fund, LP",
-        "sim": 0.4735
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-028501",
-        "item": "1A",
+        "sim": 0.4732,
         "company": "M3-Brigade Acquisition VI Corp.",
-        "sim": 0.4732
+        "item": "1A"
        },
        {
-        "accession": "0001628280-26-011413",
-        "item": "1A",
+        "sim": 0.4691,
         "company": "Ares Management Corp",
-        "sim": 0.4691
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1857,
-      "latency": 1.67,
-      "calls": 1,
       "evidence": 7486,
+      "tokens": 1857,
+      "calls": 1,
+      "latency": 1.67,
       "entityRecall": 1.0,
       "entitiesFound": [
        "Vornado Realty Trust"
@@ -9978,32 +9819,76 @@
       "refused"
      ],
      "sample": {
-      "status": "refused",
-      "answer": "**Answer:** No. The graph traversal returned zero rows, and the authoritative per-company expansion block is empty. Therefore, there is no evidence that \"Alexander's, Inc.\" is listed as a subsidiary in any other company's EX-21 exhibit, nor is there any parent company identified. No SEC filer match was found for it in this dataset.\n\n**Traversal path:** Subsidiary \u2192 Company (parent) / Subsidiary \u2192 Company (filer) \u2014 both hops produced nothing.\n\n**Companies found:** None.\n\n**Accession numbers:** None applicable (no filings retrieved).",
-      "query": "MATCH (sub:Subsidiary) WHERE toLower(sub.nameNormalized) CONTAINS 'alexander' AND toLower(sub.nameNormalized) CONTAINS 'inc' OPTIONAL MATCH (sub)-[r:SUBSIDIARY_OF]->(parent:Company) OPTIONAL MATCH (sub)-[:RESOLVES_TO]->(filer:Company) RETURN sub.name AS subsidiaryName, parent.name AS parentName, parent.cik AS parentCik, r.filingId AS filingId, filer.name AS filerName, filer.cik AS filerCik LIMIT 25",
+      "status": "pass",
+      "answer": "**Yes.** Alexander's, Inc. is listed as a subsidiary in Vornado Realty Trust's EX-21 exhibit, and it files separately as its own SEC filer.\n\n**Parent:** Vornado Realty Trust (CIK 899689), filing 0000899689-26-000009.\n\n**Separate filer:** Alexander's, Inc. (CIK 3499) files its own 10-K (accession 0000003499-26-000005), confirming independent filer status.\n\n**Traversal path:** Subsidiary \u2192 Company (parent) / Subsidiary \u2192 Company (filer).\n\n**Other matches (not the target):** Hain Celestial Group lists \"Dana Alexander, Inc\"; Emerson Electric lists \"Alexander Schaeff, Inc\"; Aon plc lists \"Alexander Reinsurance Intermediaries, Inc\"; Alexander's, Inc. itself lists its own subsidiaries (e.g., Alexander's of Brooklyn, Inc.). None of these are Alexander's, Inc. itself.",
+      "query": "MATCH (sub:Subsidiary) WHERE toLower(sub.name) CONTAINS 'alexander' AND toLower(sub.name) CONTAINS 'inc' OPTIONAL MATCH (sub)-[s:SUBSIDIARY_OF]->(parent:Company) OPTIONAL MATCH (sub)-[:RESOLVES_TO]->(filer:Company) RETURN coalesce(parent.cik, filer.cik) AS companyCik, coalesce(parent.name, filer.name) AS entityName, sub.name AS subsidiaryName, sub.nameNormalized AS subsidiaryNameNormalized, s.filingId AS filingId",
       "queryLang": "cypher",
-      "rows": 0,
+      "rows": 9,
       "retrieved": [],
-      "expanded": [],
-      "snippets": 0,
+      "expanded": [
+       {
+        "cik": 3499,
+        "name": "ALEXANDERS INC",
+        "subsidiaryCount": 26,
+        "riskFilings": [
+         "0000003499-26-000005"
+        ]
+       },
+       {
+        "cik": 32604,
+        "name": "EMERSON ELECTRIC CO",
+        "subsidiaryCount": 506,
+        "riskFilings": [
+         "0000032604-25-000087"
+        ]
+       },
+       {
+        "cik": 315293,
+        "name": "Aon plc",
+        "subsidiaryCount": 851,
+        "riskFilings": [
+         "0001628280-26-008116"
+        ]
+       },
+       {
+        "cik": 899689,
+        "name": "VORNADO REALTY TRUST",
+        "subsidiaryCount": 352,
+        "riskFilings": [
+         "0000899689-26-000009"
+        ]
+       },
+       {
+        "cik": 910406,
+        "name": "HAIN CELESTIAL GROUP INC",
+        "subsidiaryCount": 68,
+        "riskFilings": [
+         "0001193125-25-203534"
+        ]
+       }
+      ],
+      "snippets": 4,
       "textTerms": [
        "subsidiary",
        "exhibit 21",
-       "parent company"
+       "alexander's"
       ],
-      "tokens": 2782,
-      "latency": 4.45,
+      "evidence": 5683,
+      "tokens": 5539,
       "calls": 3,
-      "evidence": 9,
-      "entityRecall": 0.0,
-      "entitiesFound": [],
-      "entitiesMissing": [
+      "latency": 5.8,
+      "entityRecall": 1.0,
+      "entitiesFound": [
        "Vornado Realty Trust"
       ],
+      "entitiesMissing": [],
       "forbidden": [],
-      "cited": [],
+      "cited": [
+       "0000003499-26-000005",
+       "0000899689-26-000009"
+      ],
       "correctCites": [],
-      "citePrecision": null,
+      "citePrecision": 0.0,
       "citeRecall": null
      }
     }
@@ -10013,19 +9898,19 @@
    "id": "T4-5",
    "type": "T4",
    "kind": "cross-document entity resolution",
-   "question": "Is \"AllianceBernstein Holding L.P.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "expect": "GraphRAG",
+   "question": "Is \"AllianceBernstein Holding L.P.\" listed as a subsidiary in another company's EX-21 exhibit while also being an SEC filer in its own right? If so, name the parent that lists it and confirm whether it files separately.",
    "validAccessions": [],
    "required": [
-    "AllianceBernstein L.P."
+    "AllianceBernstein L.P.|Equitable Holdings|AllianceBernstein Holding"
    ],
    "runs": {
     "text_to_sql": {
-     "passes": 2,
+     "passes": 3,
      "trialStatuses": [
       "pass",
       "pass",
-      "fail"
+      "pass"
      ],
      "sample": {
       "status": "pass",
@@ -10037,10 +9922,10 @@
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 1971,
-      "latency": 3.86,
-      "calls": 2,
       "evidence": 429,
+      "tokens": 1971,
+      "calls": 2,
+      "latency": 3.86,
       "entityRecall": 1.0,
       "entitiesFound": [
        "AllianceBernstein L.P."
@@ -10058,80 +9943,72 @@
      }
     },
     "vector_rag": {
-     "passes": 0,
+     "passes": 3,
      "trialStatuses": [
-      "refused",
-      "refused",
-      "refused"
+      "pass",
+      "pass",
+      "pass"
      ],
      "sample": {
-      "status": "refused",
+      "status": "pass",
       "answer": "Based solely on the provided excerpts, the answer is **no**. The excerpts do not mention \"AllianceBernstein Holding L.P.\" as a subsidiary in any EX-21 exhibit, nor do they name any parent company listing it. The excerpts also do not confirm whether it files separately as an SEC filer. The provided text discusses unrelated companies (e.g., CuriosityStream, CoastalSouth Bancshares, Safe & Green Development, Alliance Laundry Holdings, Andalusian Credit Company, Exicure) and topics like emerging growth company status and risk factors, but contains no information about AllianceBernstein Holding L.P. or its subsidiary relationships.",
       "query": null,
       "queryLang": null,
       "rows": null,
       "retrieved": [
        {
-        "accession": "0001628280-26-017346",
-        "item": "1A",
+        "sim": 0.4777,
         "company": "CuriosityStream Inc.",
-        "sim": 0.4777
+        "item": "1A"
        },
        {
-        "accession": "0001193125-26-104114",
-        "item": "1A",
+        "sim": 0.4668,
         "company": "CoastalSouth Bancshares, Inc.",
-        "sim": 0.4668
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-037999",
-        "item": "1A",
+        "sim": 0.464,
         "company": "Safe & Green Development Corp",
-        "sim": 0.464
+        "item": "1A"
        },
        {
-        "accession": "0001317685-26-000011",
-        "item": "1A",
+        "sim": 0.4595,
         "company": "Alliance Laundry Holdings Inc.",
-        "sim": 0.4595
+        "item": "1A"
        },
        {
-        "accession": "0001104659-26-027134",
-        "item": "1A",
+        "sim": 0.4523,
         "company": "Andalusian Credit Company, LLC",
-        "sim": 0.4523
+        "item": "1A"
        },
        {
-        "accession": "0001698530-26-000028",
-        "item": "1A",
+        "sim": 0.4505,
         "company": "EXICURE, INC.",
-        "sim": 0.4505
+        "item": "1A"
        },
        {
-        "accession": "0001850902-26-000002",
-        "item": "1A",
+        "sim": 0.4485,
         "company": "Alpha Teknova, Inc.",
-        "sim": 0.4485
+        "item": "1A"
        },
        {
-        "accession": "0001213900-26-036715",
-        "item": "1A",
+        "sim": 0.447,
         "company": "Brag House Holdings, Inc.",
-        "sim": 0.447
+        "item": "1A"
        }
       ],
       "expanded": [],
       "snippets": null,
       "textTerms": [],
-      "tokens": 2187,
-      "latency": 1.84,
-      "calls": 1,
       "evidence": 8996,
-      "entityRecall": 0.0,
-      "entitiesFound": [],
-      "entitiesMissing": [
-       "AllianceBernstein L.P."
+      "tokens": 2187,
+      "calls": 1,
+      "latency": 1.84,
+      "entityRecall": 1.0,
+      "entitiesFound": [
+       "AllianceBernstein Holding"
       ],
+      "entitiesMissing": [],
       "forbidden": [],
       "cited": [],
       "correctCites": [],
@@ -10140,11 +10017,11 @@
      }
     },
     "graphrag": {
-     "passes": 2,
+     "passes": 3,
      "trialStatuses": [
       "pass",
       "pass",
-      "refused"
+      "pass"
      ],
      "sample": {
       "status": "pass",
@@ -10183,10 +10060,10 @@
        "alliancebernstein holding",
        "ex-21"
       ],
-      "tokens": 6375,
-      "latency": 6.63,
-      "calls": 3,
       "evidence": 7781,
+      "tokens": 6375,
+      "calls": 3,
+      "latency": 6.63,
       "entityRecall": 1.0,
       "entitiesFound": [
        "AllianceBernstein L.P."
@@ -10211,34 +10088,34 @@
  ],
  "totals": {
   "text_to_sql": {
-   "passes": 28,
+   "passes": 29,
    "runs": 60,
    "halluc": 2,
-   "refused": 21,
+   "refused": 12,
    "uncited": 16,
    "tokens": 158171,
    "latency": 25.3,
    "evidence": 3170
   },
   "vector_rag": {
-   "passes": 6,
+   "passes": 9,
    "runs": 60,
    "halluc": 0,
-   "refused": 54,
+   "refused": 45,
    "uncited": 6,
    "tokens": 118850,
    "latency": 1.6,
    "evidence": 8557
   },
   "graphrag": {
-   "passes": 44,
+   "passes": 45,
    "runs": 60,
    "halluc": 0,
-   "refused": 9,
+   "refused": 8,
    "uncited": 0,
    "tokens": 780500,
    "latency": 5.9,
-   "evidence": 6484
+   "evidence": 6485
   }
  },
  "killerId": "T3-2",
@@ -10259,5 +10136,12 @@
    "nodes": 430257,
    "edges": 561144
   }
+ },
+ "usage": {
+  "calls": 341,
+  "prompt_tokens": 995657,
+  "completion_tokens": 61864,
+  "reasoning_tokens": 0,
+  "total_tokens": 1057521
  }
 }

@@ -352,6 +352,7 @@ export default function Benchmarks() {
                 'A 900-token answer cap truncated answers mid-citation, turning passes into uncited.',
                 'pgvector post-filtering returned 0 of 8 rows while 164 matched, until hnsw.iterative_scan was enabled — Vector RAG had been scored on an empty retriever.',
                 'A shared torch encoder segfaulted under concurrency; a shared Postgres connection interleaved across threads.',
+                'T4-5 encoded one expected parent when the loaded data has three filers listing AllianceBernstein Holding L.P. in their EX-21. All three architectures were naming a genuine parent and being marked wrong. Found by inspecting a single failing attempt, fixed by accepting any verified parent, and the 180 saved answers were re-scored — no new LLM calls. It moved text-to-SQL 28→29, Vector RAG 6→9 and GraphRAG 44→45, so the defect had been understating the two baselines more than the graph.',
               ].map((s) => (
                 <li key={s} className="flex gap-2.5">
                   <span className="text-support-warning">!</span>
@@ -536,11 +537,11 @@ export default function Benchmarks() {
           {[
             [
               'Vector RAG lost the category it was supposed to win — 3/15',
-              'T1 asks a single company what it disclosed about one topic: exactly the shape similarity search is for, and on a single month of filings it passed. At 508,714 chunks from 5,210 companies it collapsed. Asked about Moderna it returned Entegris, Hayward, Open Text, Arrowhead and NVIDIA — all genuinely about supply chain, none Moderna. A company name is not a strong enough signal in embedding space to outweigh topical similarity. To its credit it refused honestly 12 times rather than answering about the wrong company.',
+              'T1 asks a single company what it disclosed about one topic: exactly the shape similarity search is for, and on a single month of filings it passed. At 508,714 chunks from 5,210 companies it collapsed. Asked about Moderna it returned Entegris, Hayward, Open Text, Arrowhead and NVIDIA — all genuinely about supply chain, none Moderna. A company name is not a strong enough signal in embedding space to outweigh topical similarity. To its credit it refused honestly on 12 of the 15 attempts rather than answering about the wrong company.',
             ],
             [
-              'Plain SQL beat GraphRAG at entity resolution — 13/15 vs 8/15',
-              'T4 was written for the graph and the graph came second. The failure is mundane: the model wrote Subsidiary {nameNormalized: "aep texas inc"} while the loader’s normalise step strips corporate suffixes, so the stored key is "aep texas". Zero rows, honest refusal, 0/3 on T4-2. Postgres won because ILIKE %aep texas% is forgiving in a way an exact property match is not. LLM-authored Cypher is no more reliable than LLM-authored SQL, and a normalised join key is a liability when the model cannot see it.',
+              'Plain SQL beat GraphRAG at entity resolution — 14/15 vs 9/15',
+              'T4 was written for the graph and the graph came second. The failure is mundane: the model wrote Subsidiary {nameNormalized: "aep texas inc"} while the loader’s normalise step strips corporate suffixes, so the stored key is "aep texas". Zero rows, honest refusal, 0/3 on T4-2. Across the category text-to-SQL took 4 of 5 questions outright to GraphRAG’s 2. Postgres won because ILIKE %aep texas% is forgiving in a way an exact property match is not. LLM-authored Cypher is no more reliable than LLM-authored SQL, and a normalised join key is a liability when the model cannot see it.',
             ],
             [
               'GraphRAG is the wrong tool for aggregation — 6/15',
@@ -548,7 +549,7 @@ export default function Benchmarks() {
             ],
             [
               'The accuracy is bought with tokens and latency',
-              `GraphRAG spent ${fmt(data.totals.graphrag.tokens)} tokens against ${fmt(data.totals.text_to_sql.tokens)} for text-to-SQL and ${fmt(data.totals.vector_rag.tokens)} for Vector RAG, at ${data.totals.graphrag.latency}s average latency versus ${data.totals.vector_rag.latency}s. It is 6.6× the token cost of similarity search for 7.3× the passes — worth it here, but that ratio is a property of these questions, not a law. The reverse cost also matters: text-to-SQL averaged 92s on T3 and peaked at 445s for a single SELECT, because the model joins subsidiary × filing_section × reporting_owner without narrowing first. The live playground therefore runs with a 45s statement timeout, which those questions hit.`,
+              `GraphRAG spent ${fmt(data.totals.graphrag.tokens)} tokens against ${fmt(data.totals.text_to_sql.tokens)} for text-to-SQL and ${fmt(data.totals.vector_rag.tokens)} for Vector RAG, at ${data.totals.graphrag.latency}s average latency versus ${data.totals.vector_rag.latency}s. It is 6.6× the token cost of similarity search for 5× the passes — worth it here, but that ratio is a property of these questions, not a law. The reverse cost also matters: text-to-SQL averaged 92s on T3 and peaked at 445s for a single SELECT, because the model joins subsidiary × filing_section × reporting_owner without narrowing first. The live playground therefore runs with a 45s statement timeout, which those questions hit.`,
             ],
             [
               'Two categories out of four, not a general win',
@@ -556,7 +557,7 @@ export default function Benchmarks() {
             ],
             [
               'The hallucinations were all one failure mode',
-              'Only two of 180 runs stated something verifiably false, both text-to-SQL on T3. Both were surname collisions: asked about Monica Lozano it reported five companies including Mondelez and Ternium — those are Mariano and Santiago Lozano. Asked about William Giles it reported ten companies. This is the exact failure the graph exists to prevent, and it is worth noting the model was fluent and confident both times.',
+              'Only two of the 180 attempts stated something verifiably false, both text-to-SQL on T3. Both were surname collisions: asked about Monica Lozano it reported five companies including Mondelez and Ternium — those are Mariano and Santiago Lozano. Asked about William Giles it reported ten companies. This is the exact failure the graph exists to prevent, and it is worth noting the model was fluent and confident both times.',
             ],
           ].map(([title, body]) => (
             <Card key={title}>
