@@ -124,7 +124,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
       <div className="divide-y divide-border">
         {state?.busy && (
           <div className="p-4">
-            <p className="mb-2.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+            <p className="mb-2.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
  working
             </p>
             <Skeleton />
@@ -133,7 +133,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
 
         {state?.error && (
           <div className="p-4">
-            <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+            <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
  failed
             </p>
             <p className="font-mono text-[11px] leading-relaxed text-support-error">{state.error}</p>
@@ -142,7 +142,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
 
         {r?.timeout && !state.busy && (
           <div className="p-4">
-            <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+            <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
               exceeded the request deadline
             </p>
             <p className="text-[12.5px] leading-relaxed text-support-error">{r.error}</p>
@@ -153,7 +153,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
           <>
             {(r.sql || r.cypher) && (
               <div className="p-4">
-                <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                   {r.sql ? 'SQL it wrote' : 'Cypher it wrote'}
                   {(r.sql ? r.row_count : r.graph_rows) != null &&
                     ` · ${fmt(r.sql ? r.row_count : r.graph_rows)} rows`}
@@ -164,7 +164,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
 
             {r.retrieved?.length > 0 && (
               <div className="p-4">
-                <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
  chunks retrieved · cosine similarity
                 </p>
                 <table className="w-full border-collapse font-mono text-[10.5px] tabular-nums">
@@ -183,7 +183,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
 
             {r.companies_expanded?.length > 0 && (
               <div className="p-4">
-                <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
  entities resolved, then expanded completely
                 </p>
                 <ul className="font-mono text-[10.5px] tabular-nums">
@@ -209,7 +209,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
             )}
 
             <div className="p-4">
-              <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+              <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
  what it answered
               </p>
               <div
@@ -221,7 +221,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
             </div>
 
             <div className="p-4">
-              <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+              <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                 {sc ? 'score' : 'cost & evidence'}
               </p>
               <dl className="grid grid-cols-2 gap-y-1 font-mono text-[10.5px] tabular-nums">
@@ -260,7 +260,7 @@ function Pane({ mode, state, model, modelLabel, isBenchmark, showModel }) {
               )}
               {r.trace && (
                 <details className="mt-3">
-                  <summary className="cursor-pointer font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper hover:text-interactive">
+                  <summary className="cursor-pointer font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper hover:text-interactive">
  retrieval trace
                   </summary>
                   <div className="mt-2">
@@ -460,7 +460,7 @@ export default function Playground() {
         >
           <label
  htmlFor="q"
- className="mb-2 block font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper"
+ className="mb-2 block font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper"
           >
             Your question
           </label>
@@ -485,7 +485,7 @@ export default function Playground() {
               {MODES.map((m) => (
                 <label
  key={m}
- className={`flex cursor-pointer select-none items-center gap-2 border px-2.5 py-1.5 font-mono text-[11px] transition-colors ${
+ className={`flex min-h-[2.25rem] cursor-pointer select-none items-center gap-2 border px-3 py-2 font-mono text-[11.5px] transition-colors sm:min-h-0 sm:px-2.5 sm:py-1.5 sm:text-[11px] ${
  selected.has(m)
                       ? 'border-interactive bg-interactive-light text-text'
  : 'border-border bg-layer text-secondary'
@@ -495,7 +495,7 @@ export default function Playground() {
  type="checkbox"
  checked={selected.has(m)}
  onChange={() => toggle(m)}
- className="accent-interactive"
+ className="h-4 w-4 accent-interactive"
                   />
                   {MODE_META[m].label}
                 </label>
@@ -520,7 +520,7 @@ export default function Playground() {
             {data.types.map((t) => (
               <div key={t.id} className="flex w-full flex-wrap items-center gap-2">
                 <span
-                  className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper"
+                  className="font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-helper"
                   title={`expected to win: ${t.expect}`}
                 >
                   {t.kind}
@@ -531,7 +531,7 @@ export default function Playground() {
                     type="button"
                     onClick={() => setQuestion(cq.question)}
                     title={cq.question}
-                    className={`cursor-pointer border px-2.5 py-1 font-mono text-[11.5px] transition-colors ${
+                    className={`min-h-[2.25rem] cursor-pointer border px-3 py-2 font-mono text-[11.5px] transition-colors sm:min-h-0 sm:px-2.5 sm:py-1 ${
                       question === cq.question
                         ? 'border-interactive bg-interactive-light text-interactive'
                         : 'border-border bg-layer text-secondary hover:border-interactive hover:text-text'
@@ -543,7 +543,7 @@ export default function Playground() {
               </div>
             ))}
             <div className="flex w-full flex-wrap items-center gap-2 border-t border-border pt-2.5">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper">
+              <span className="font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-helper">
                 free-form · no ground truth
               </span>
               {EXTRAS.map((cq) => (
@@ -563,7 +563,7 @@ export default function Playground() {
           {catalogue.length > 0 && (
             <div className="mt-4 border-t border-border pt-3.5">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-helper">
+                <span className="font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-helper">
                   model &middot; pick up to 3
                 </span>
                 <span className="font-mono text-[10px] text-helper">
@@ -581,7 +581,7 @@ export default function Playground() {
                       onClick={() => toggleModel(m.id)}
                       disabled={atCap}
                       title={`${m.id}${m.note ? ` — ${m.note}` : ''}`}
-                      className={`border px-2.5 py-1 text-left text-[11.5px] transition-colors ${
+                      className={`min-h-[2.25rem] border px-3 py-2 text-left text-[11.5px] transition-colors sm:min-h-0 sm:px-2.5 sm:py-1 ${
                         on
                           ? m.benchmark
                             ? 'border-interactive bg-interactive-light text-interactive'
@@ -597,7 +597,7 @@ export default function Playground() {
                       </span>
                       {m.benchmark && (
                         <span className="ml-1.5 font-mono text-[10px] text-interactive">
-                          &starf; benchmarked
+                          ★ benchmarked
                         </span>
                       )}
                     </button>

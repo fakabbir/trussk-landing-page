@@ -79,7 +79,7 @@ Form 3 / 4 / 5  ·  a separate filing entirely
           </p>
           <table className="mt-3.5 w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-border font-mono text-[10px] uppercase tracking-wider text-secondary">
+              <tr className="border-b border-border font-mono text-[10.5px] uppercase sm:text-[10px] tracking-wider text-secondary">
                 <th className="py-1.5 pr-3 font-medium">Item</th>
                 <th className="py-1.5 pr-3 font-medium">Section</th>
                 <th className="py-1.5 pr-3 text-right font-medium">Filings</th>
@@ -140,7 +140,7 @@ Form 3 / 4 / 5  ·  a separate filing entirely
             {fmt(t.companies)} companies.
           </p>
 
-          <p className="mt-3.5 font-mono text-[10px] uppercase tracking-[0.14em] text-helper">
+          <p className="mt-3.5 font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-helper">
             how many each company discloses
           </p>
           <div className="mt-2 space-y-1.5">

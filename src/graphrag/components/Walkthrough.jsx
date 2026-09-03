@@ -127,7 +127,7 @@ export function Walkthrough() {
     <div className="border border-border bg-bg">
       {/* the question */}
       <div className="border-b border-border bg-layer px-5 py-5">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-interactive">
+        <p className="font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.16em] text-interactive">
           One query, traced through both architectures
         </p>
         <p className="mt-2.5 max-w-4xl border-l-2 border-interactive pl-4 font-serif text-[16.5px] leading-relaxed text-text">
@@ -175,7 +175,7 @@ export function Walkthrough() {
 
       {/* ── vector lane ─────────────────────────────────────────────── */}
       {lane === 'vector' && (
-        <div className="px-5 py-6">
+        <div className="px-4 py-6 sm:px-5">
           <ol className="space-y-0">
             {VECTOR_STEPS.map((s, i) => (
               <li key={s.label} className="flex gap-4 border-b border-border py-3.5 last:border-0">
@@ -212,18 +212,20 @@ export function Walkthrough() {
 
       {/* ── graph lane ──────────────────────────────────────────────── */}
       {lane === 'graph' && (
-        <div className="px-5 py-6">
+        <div className="px-4 py-6 sm:px-5">
           <div className="space-y-5">
             {GRAPH_STEPS.map((s) => (
               <div key={s.n} className="border-b border-border pb-5 last:border-0 last:pb-0">
-                <div className="flex items-baseline gap-3">
+                {/* wraps below sm: "Bank of America 55 · Apple 18 · Target 6"
+                    with ml-auto shrink-0 pushed the page past 390px */}
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
                   <span className="font-mono text-sm font-semibold text-interactive">{s.n}</span>
                   <h4 className="text-[15px] font-semibold text-text">{s.title}</h4>
-                  <span className="ml-auto shrink-0 border border-interactive bg-interactive-light px-2 py-0.5 font-mono text-[10.5px] text-interactive">
+                  <span className="border border-interactive bg-interactive-light px-2 py-0.5 font-mono text-[10.5px] text-interactive sm:ml-auto">
                     {s.result}
                   </span>
                 </div>
-                <div className="mt-3 sm:pl-7">
+                <div className="mt-3 min-w-0 sm:pl-7">
                   <Code>{s.code}</Code>
                   <p className="mt-2 text-[13px] leading-relaxed text-secondary">{s.note}</p>
                 </div>
@@ -239,7 +241,7 @@ export function Walkthrough() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] border-collapse font-mono text-[12px] tabular-nums">
                 <thead>
-                  <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-helper">
+                  <tr className="border-b border-border text-left text-[10.5px] uppercase sm:text-[10px] tracking-wider text-helper">
                     <th className="px-4 py-2 font-medium">Company</th>
                     <th className="px-4 py-2 font-medium">CIK</th>
                     <th className="px-4 py-2 text-right font-medium">Subsidiaries</th>

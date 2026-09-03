@@ -31,7 +31,7 @@ function Nav() {
 
         <div className="hidden items-center gap-7 md:flex">
           {links.map(([label, to]) => (
-            <Link key={to} to={to} className="text-sm text-secondary transition-colors hover:text-interactive">
+            <Link key={to} to={to} className="py-1.5 text-sm text-secondary transition-colors hover:text-interactive">
               {label}
             </Link>
           ))}
@@ -318,11 +318,26 @@ function Footer() {
         <p className="text-sm text-helper">
           &copy; {new Date().getFullYear()} Trussk. Trustworthy AI agents, measured.
         </p>
-        <div className="flex flex-wrap gap-6">
-          <Link to="/graphrag" className="text-sm text-secondary hover:text-interactive">Research</Link>
-          <Link to="/graphrag/benchmarks" className="text-sm text-secondary hover:text-interactive">Benchmarks</Link>
-          <Link to="/graphrag/playground" className="text-sm text-secondary hover:text-interactive">Playground</Link>
-          <a href="#contact" className="text-sm text-secondary hover:text-interactive">Contact</a>
+        <div className="flex flex-wrap gap-x-6">
+          {[
+            ['Research', '/graphrag'],
+            ['Benchmarks', '/graphrag/benchmarks'],
+            ['Playground', '/graphrag/playground'],
+          ].map(([label, to]) => (
+            <Link
+              key={to}
+              to={to}
+              className="inline-flex min-h-[2.25rem] items-center text-sm text-secondary hover:text-interactive"
+            >
+              {label}
+            </Link>
+          ))}
+          <a
+            href="#contact"
+            className="inline-flex min-h-[2.25rem] items-center text-sm text-secondary hover:text-interactive"
+          >
+            Contact
+          </a>
         </div>
       </div>
     </footer>

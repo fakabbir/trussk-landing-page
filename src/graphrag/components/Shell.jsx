@@ -16,8 +16,8 @@ export function Shell({ children }) {
  return (
     <div className="min-h-screen bg-bg text-text">
       <header className="sticky top-0 z-50 border-b border-border bg-bg">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex items-center justify-between py-3.5">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="flex flex-col gap-1 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-3.5">
             <div className="flex items-center gap-3">
               <Link to="/" className="flex items-center gap-2.5 shrink-0">
                 <div className="flex h-8 w-8 items-center justify-center bg-interactive-light">
@@ -34,7 +34,10 @@ export function Shell({ children }) {
               </Link>
             </div>
 
-            <nav className="flex items-center gap-1">
+            {/* Four tabs are 496px wide, which pushed every page past a 360px
+                viewport. Below sm they scroll horizontally in their own strip,
+                bled to the screen edge so it is visibly scrollable. */}
+            <nav className="-mx-4 flex items-center gap-1 overflow-x-auto px-4 pb-0.5 [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 sm:pb-0">
               {tabs.map((t) => (
                 <NavLink
  key={t.to}
@@ -42,7 +45,7 @@ export function Shell({ children }) {
  end={t.end}
  className={({ isActive }) =>
  [
-                      ' px-3 py-1.5 text-sm transition-colors',
+                      'shrink-0 whitespace-nowrap px-2.5 py-1.5 text-[13px] transition-colors sm:px-3 sm:text-sm',
  isActive
                         ? 'bg-interactive-light text-interactive'
  : 'text-secondary hover:text-text',
@@ -65,7 +68,10 @@ export function Shell({ children }) {
             A Trussk research subproject. Data: SEC EDGAR, public domain.
             Not investment advice.
           </p>
-          <Link to="/" className="transition-colors hover:text-interactive">
+          <Link
+            to="/"
+            className="inline-flex min-h-[2.25rem] items-center transition-colors hover:text-interactive"
+          >
             ← Back to trussk.com
           </Link>
         </div>
@@ -101,7 +107,7 @@ export function Section({ id, label, note, children, className = '' }) {
  const href = id ? `${window.location.pathname}#${id}` : null
 
  return (
-    <section id={id} className={`mx-auto max-w-6xl px-6 py-10 scroll-mt-20 ${className}`}>
+    <section id={id} className={`mx-auto max-w-6xl px-4 py-8 scroll-mt-24 sm:px-6 sm:py-10 ${className}`}>
       {label && (
         <div className="group mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-2.5">
           <h2 className="font-serif text-xl tracking-tight">
@@ -119,7 +125,9 @@ export function Section({ id, label, note, children, className = '' }) {
                 }}
                 aria-label={`Link to "${label}"`}
                 title="Copy a link to this section"
-                className="ml-2 align-middle font-mono text-[15px] text-helper opacity-0 transition-opacity hover:text-interactive focus-visible:opacity-100 group-hover:opacity-100"
+                /* hidden below sm: revealed by hover, which touch does not
+                   have, and a 9px tap target would be unusable anyway */
+                className="ml-2 hidden align-middle font-mono text-[15px] text-helper opacity-0 transition-opacity hover:text-interactive focus-visible:opacity-100 group-hover:opacity-100 sm:inline"
               >
                 #
               </a>
@@ -161,7 +169,11 @@ export function useHashScroll() {
 
 export function Card({ children, className = '' }) {
  return (
-    <div className={` border border-border bg-layer p-5 ${className}`}>
+    // min-w-0 so a Card used as a grid/flex child can shrink below the width of
+    // an unbreakable child such as a <pre>. Grid items default to
+    // min-width:auto, which is what let one code block force the Benchmarks
+    // page to 2897px at a 360px viewport.
+    <div className={`min-w-0 border border-border bg-layer p-4 sm:p-5 ${className}`}>
       {children}
     </div>
   )

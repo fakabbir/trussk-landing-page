@@ -6,9 +6,12 @@ const n = (x) => Number(x).toLocaleString()
 
 function Code({ children, label, height = 'max-h-72' }) {
   return (
-    <div>
+    // min-w-0 so the scrolling <pre> cannot dictate this wrapper's width. Grid
+    // and flex children default to min-width:auto, which let one verbatim XML
+    // sample widen the whole overview page past a 390px viewport.
+    <div className="min-w-0">
       {label && (
-        <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+        <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
           {label}
         </p>
       )}
@@ -47,7 +50,9 @@ function Stage({ num, title, subtitle, children, defaultOpen = false }) {
           {open ? '−' : '+'}
         </span>
       </button>
-      {open && <div className="px-5 pb-7 sm:pl-[4.25rem]">{children}</div>}
+      {open && (
+        <div className="min-w-0 px-4 pb-7 sm:px-5 sm:pl-[4.25rem]">{children}</div>
+      )}
     </div>
   )
 }
@@ -198,7 +203,7 @@ export function Pipeline() {
   return (
     <div className="border border-border bg-bg">
       <div className="border-b border-border bg-layer px-5 py-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-interactive">
+        <p className="font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.16em] text-interactive">
           Pipeline documentation
         </p>
         <h3 className="mt-1 font-serif text-xl tracking-tight text-text">

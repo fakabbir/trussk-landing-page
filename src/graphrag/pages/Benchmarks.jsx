@@ -56,7 +56,7 @@ function OutcomeGrid({ onPick }) {
     <div className="overflow-x-auto border border-border bg-bg">
       <table className="w-full min-w-[640px] border-collapse text-sm">
         <thead>
-          <tr className="border-b border-border bg-layer text-left font-mono text-[10px] uppercase tracking-[0.14em] text-secondary">
+          <tr className="border-b border-border bg-layer text-left font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-secondary">
             <th className="px-5 py-3 font-medium">Question</th>
             {MODES.map((m) => (
               <th key={m} className="px-5 py-3 font-medium text-text">
@@ -111,7 +111,7 @@ function OutcomeGrid({ onPick }) {
 
 function CaseStudy({ q }) {
   return (
-    <div className="border border-border bg-layer p-5">
+    <div className="border border-border bg-layer p-4 sm:p-5">
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="font-mono text-[11px] font-semibold text-interactive">{q.id}</span>
         <h3 className="font-serif text-lg tracking-tight">{q.kind}</h3>
@@ -123,7 +123,7 @@ function CaseStudy({ q }) {
       </p>
 
       {q.validAccessions.length > 0 && (
-        <p className="mt-2.5 font-mono text-[10.5px] leading-relaxed text-secondary">
+        <p className="mt-2.5 font-mono text-[10.5px] leading-relaxed break-all text-secondary">
           filings that answer it: {q.validAccessions.join(', ')}
         </p>
       )}
@@ -132,7 +132,7 @@ function CaseStudy({ q }) {
         {MODES.map((m) => {
           const s = q.runs[m].sample
           return (
-            <div key={m} className="border border-border bg-layer">
+            <div key={m} className="min-w-0 border border-border bg-layer">
               <div className="border-b border-border px-4 py-3">
                 <div className="flex items-center justify-between gap-2">
                   <h4 className="font-mono text-[11px] font-semibold uppercase tracking-wider">
@@ -148,7 +148,7 @@ function CaseStudy({ q }) {
               <div className="space-y-3 p-4">
                 {s.query && (
                   <div>
-                    <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                    <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                       {s.queryLang === 'sql' ? 'SQL it wrote' : 'Cypher it wrote'}
                       {s.rows !== null && ` · ${fmt(s.rows)} rows`}
                     </p>
@@ -158,7 +158,7 @@ function CaseStudy({ q }) {
 
                 {s.retrieved?.length > 0 && (
                   <div>
-                    <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                    <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                       chunks retrieved · cosine similarity
                     </p>
                     <table className="w-full border-collapse font-mono text-[10.5px] tabular-nums">
@@ -177,7 +177,7 @@ function CaseStudy({ q }) {
 
                 {s.expanded?.length > 0 && (
                   <div>
-                    <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                    <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                       entities resolved, then expanded completely
                     </p>
                     <ul className="font-mono text-[10.5px] tabular-nums">
@@ -197,7 +197,7 @@ function CaseStudy({ q }) {
                 )}
 
                 <div>
-                  <p className="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-helper">
+                  <p className="mb-1.5 font-mono text-[10.5px] sm:text-[9.5px] uppercase tracking-[0.14em] text-helper">
                     what it answered
                   </p>
                   <Answer text={s.answer} forbidden={s.forbidden} />
@@ -259,7 +259,7 @@ export default function Benchmarks() {
         <div className="mt-6 overflow-x-auto border border-border bg-bg">
           <table className="w-full min-w-[620px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-border bg-layer text-left font-mono text-[10px] uppercase tracking-[0.14em] text-secondary">
+              <tr className="border-b border-border bg-layer text-left font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-secondary">
                 <th className="px-5 py-3 font-medium">Across all 60 attempts</th>
                 {MODES.map((m) => (
                   <th key={m} className="px-5 py-3 font-medium text-text">
@@ -373,9 +373,10 @@ export default function Benchmarks() {
             zero rows, the model sees the error and writes one correction. Equal budget, very
             unequal use.
           </p>
-          <table className="mt-3 w-full border-collapse font-mono text-[11.5px] tabular-nums">
+          <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[380px] border-collapse font-mono text-[11.5px] tabular-nums">
             <thead>
-              <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-secondary">
+              <tr className="border-b border-border text-left text-[10.5px] uppercase sm:text-[10px] tracking-wider text-secondary">
                 <th className="py-1.5 pr-3 font-medium">Mode</th>
                 <th className="py-1.5 pr-3 text-right font-medium">Repaired</th>
                 <th className="py-1.5 pr-3 text-right font-medium">T1</th>
@@ -406,6 +407,7 @@ export default function Benchmarks() {
               })}
             </tbody>
           </table>
+          </div>
           <p className="mt-3 text-[13.5px] leading-relaxed text-secondary">
             GraphRAG leaned on the repair <strong className="text-text">five times as often</strong>,
             and on T4 it needed one on every single attempt — the first Cypher matches
@@ -429,9 +431,10 @@ export default function Benchmarks() {
             <h3 className="font-mono text-[11px] uppercase tracking-wider text-secondary">
               Narrative sections by 10-K item
             </h3>
-            <table className="mt-3 w-full border-collapse font-mono text-[11.5px] tabular-nums">
+            <div className="mt-3 overflow-x-auto">
+            <table className="w-full min-w-[340px] border-collapse font-mono text-[11.5px] tabular-nums">
               <thead>
-                <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-secondary">
+                <tr className="border-b border-border text-left text-[10.5px] uppercase sm:text-[10px] tracking-wider text-secondary">
                   <th className="py-1.5 pr-3 font-medium">Item</th>
                   <th className="py-1.5 pr-3 font-medium">Section</th>
                   <th className="py-1.5 pr-3 text-right font-medium">Filings</th>
@@ -454,6 +457,7 @@ export default function Benchmarks() {
                 ))}
               </tbody>
             </table>
+            </div>
             <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-helper">
               Only Item 1A is embedded — {fmt(c.postgres.chunks)} chunks over{' '}
               {fmt(stats.items.find((r) => r[0] === '1A')[1])} risk-factor sections. Embedding all
@@ -504,7 +508,7 @@ export default function Benchmarks() {
         <div className="mb-5 space-y-2">
           {data.types.map((t) => (
             <div key={t.id} className="flex flex-wrap items-center gap-2">
-              <span className="w-full font-mono text-[10px] uppercase tracking-[0.14em] text-helper sm:w-44 sm:shrink-0">
+              <span className="w-full font-mono text-[10.5px] uppercase sm:text-[10px] tracking-[0.14em] text-helper sm:w-44 sm:shrink-0">
                 {t.id} · {t.kind}
               </span>
               {data.questions

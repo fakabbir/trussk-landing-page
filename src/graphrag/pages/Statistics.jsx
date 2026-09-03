@@ -73,7 +73,7 @@ function Table({ head, rows, alignRight = [] }) {
     <div className="overflow-x-auto">
       <table className="w-full border-collapse font-mono text-[11.5px] tabular-nums">
         <thead>
-          <tr className="border-b border-border text-left text-[10px] uppercase tracking-wider text-helper">
+          <tr className="border-b border-border text-left text-[10.5px] uppercase sm:text-[10px] tracking-wider text-helper">
             {head.map((h, i) => (
               <th key={h} className={`py-1.5 pr-3 font-medium ${alignRight.includes(i) ? 'text-right' : ''}`}>
                 {h}
